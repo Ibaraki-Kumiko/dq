@@ -19,7 +19,7 @@
 </head>
 <body>
 <div id="app">
-        <example-component></example-component>
+    <index></index>
 </div>
 </body>
 </html>

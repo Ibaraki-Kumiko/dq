@@ -1,8 +1,9 @@
 <template>
     <section class="page-wrapper">
         <div class="content-wrapper">
-            <h2 class="error-subtitle text-center">Something went wrong...</h2>
-            <p class="error-description text-center">We are experiencing an unexpected server error. We are working on fixing the problem. Be back soon.</p>
+            <h1 class="title font-white"><b>Comming Soon</b></h1>
+            <p class="desc font-white">Our website is currently undergoing scheduled maintenance.
+                We Should be back shortly. Thank you for your patience.</p>
         </div>
     </section>
 </template>

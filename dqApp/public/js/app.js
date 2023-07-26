@@ -5122,11 +5122,11 @@ var staticRenderFns = [function () {
     staticClass: "page-wrapper"
   }, [_c("div", {
     staticClass: "content-wrapper"
-  }, [_c("h2", {
-    staticClass: "error-subtitle text-center"
-  }, [_vm._v("Something went wrong...")]), _vm._v(" "), _c("p", {
-    staticClass: "error-description text-center"
-  }, [_vm._v("We are experiencing an unexpected server error. We are working on fixing the problem. Be back soon.")])])]);
+  }, [_c("h1", {
+    staticClass: "title font-white"
+  }, [_c("b", [_vm._v("Comming Soon")])]), _vm._v(" "), _c("p", {
+    staticClass: "desc font-white"
+  }, [_vm._v("Our website is currently undergoing scheduled maintenance.\n            We Should be back shortly. Thank you for your patience.")])])]);
 }];
 render._withStripped = true;
 

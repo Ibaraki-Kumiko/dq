@@ -5113,9 +5113,21 @@ __webpack_require__.r(__webpack_exports__);
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
-  return _c("h1", [_vm._v("Hi")]);
+  return _vm._m(0);
 };
-var staticRenderFns = [];
+var staticRenderFns = [function () {
+  var _vm = this,
+    _c = _vm._self._c;
+  return _c("section", {
+    staticClass: "page-wrapper"
+  }, [_c("div", {
+    staticClass: "content-wrapper"
+  }, [_c("h2", {
+    staticClass: "error-subtitle text-center"
+  }, [_vm._v("Something went wrong...")]), _vm._v(" "), _c("p", {
+    staticClass: "error-description text-center"
+  }, [_vm._v("We are experiencing an unexpected server error. We are working on fixing the problem. Be back soon.")])])]);
+}];
 render._withStripped = true;
 
 

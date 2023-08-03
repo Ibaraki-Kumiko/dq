@@ -7,12 +7,18 @@
 require('./bootstrap');
 
 import VueRouter from "vue-router";
+import VueCookie from "vue-cookie"
 import router from './router/index'
 import index from "./index";
+import store from "./store/index";
+import {actionTypes as authGetterTypes, getterTypes} from "./store/modules/auth";
+
+
 
 window.Vue = require('vue').default;
 
 Vue.use(VueRouter);
+Vue.use(VueCookie);
 
 
 
@@ -36,13 +42,15 @@ Vue.use(VueRouter);
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
-
+store.dispatch(authGetterTypes.getCurrentUser).then(() => {
 const app = new Vue({
     el: '#app',
     router,
     components: {
         index
     },
+    store
 });
 global.vm = app;
 
+})

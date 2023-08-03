@@ -21,6 +21,11 @@ const routes = [
         component: LoginPage
     },
 
+    {
+        path: '/logout',
+        name: 'logout',
+    },
+
 ]
 
 const router = new VueRouter({

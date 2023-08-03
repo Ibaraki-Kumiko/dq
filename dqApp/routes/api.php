@@ -34,5 +34,6 @@ Route::post('reset', [PasswordController::class, 'reset']);
 });*/
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('user', [AuthController::class, 'user']);
+    Route::post('logout', [AuthController::class, 'logout']);
 });
 

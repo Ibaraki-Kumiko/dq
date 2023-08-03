@@ -5141,8 +5141,75 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+/* harmony import */ var _store_modules_auth__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../store/modules/auth */ "./resources/js/store/modules/auth.js");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var _shared_components_ValidationErrors__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../shared/components/ValidationErrors */ "./resources/js/shared/components/ValidationErrors.vue");
+/* harmony import */ var _shared_mixin_validationErrors__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../shared/mixin/validationErrors */ "./resources/js/shared/mixin/validationErrors.js");
+/* harmony import */ var vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! vuelidate/lib/validators */ "./node_modules/vuelidate/lib/validators/index.js");
+function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
+function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return _typeof(key) === "symbol" ? key : String(key); }
+function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (_typeof(res) !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
+
+
+
+
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  name: "LoginPage"
+  name: "LoginPage",
+  mixins: _shared_mixin_validationErrors__WEBPACK_IMPORTED_MODULE_2__["default"],
+  components: {
+    ValidationErrors: _shared_components_ValidationErrors__WEBPACK_IMPORTED_MODULE_1__["default"]
+  },
+  data: function data() {
+    return {
+      email: '',
+      password: ''
+    };
+  },
+  computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_3__.mapState)({
+    isSubmitting: function isSubmitting(state) {
+      return state.auth.isSubmitting;
+    },
+    validationErrors: function validationErrors(state) {
+      return state.auth.validationErrors;
+    }
+  })),
+  validations: {
+    email: {
+      required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_4__.required,
+      email: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_4__.email
+    },
+    password: {
+      required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_4__.required,
+      minLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_4__.minLength)(8)
+    }
+  },
+  methods: {
+    onSubmit: function onSubmit() {
+      var _this = this;
+      this.$store.dispatch(_store_modules_auth__WEBPACK_IMPORTED_MODULE_0__.actionTypes.login, {
+        email: this.email,
+        password: this.password
+      }).then(function (res) {
+        res.is_admin ? _this.$router.push({
+          path: '/admin'
+        }) : _this.$router.push({
+          path: '/home'
+        });
+      });
+    },
+    hasErrorFor: function hasErrorFor(field) {
+      if (this.$store.state.auth.validationErrors && this.$store.state.auth.validationErrors.hasOwnProperty(field)) {
+        console.log(this.$store.state.auth.validationErrors);
+        return true;
+      } else {
+        return null;
+      }
+    }
+  }
 });
 
 /***/ }),
@@ -5345,7 +5412,113 @@ __webpack_require__.r(__webpack_exports__);
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
-  return _c("div");
+  return _c("div", {
+    staticClass: "auth-page"
+  }, [_c("div", {
+    staticClass: "container page"
+  }, [_c("div", {
+    staticClass: "row"
+  }, [_c("div", {
+    staticClass: "col-md-6 offset-md-3 col-xs-12"
+  }, [_c("h1", {
+    staticClass: "text-xs-center"
+  }, [_vm._v("Sign in")]), _vm._v(" "), _c("p", {
+    staticClass: "text-xs-center"
+  }, [_vm._v("\n                    Нет аккаунта?\n                    "), _c("router-link", {
+    attrs: {
+      to: {
+        name: "register"
+      }
+    }
+  }, [_vm._v("\n                        Создать новый аккаунт\n                    ")])], 1), _vm._v(" "), _vm.validationErrors ? _c("ValidationErrors", {
+    attrs: {
+      "validation-errors": _vm.validationErrors
+    }
+  }) : _vm._e(), _vm._v(" "), _vm.hasErrorFor("email") ? _c("div", [_vm._v("\n                    Эти учетные данные не соответствуют нашим записям\n                ")]) : _vm._e(), _vm._v(" "), _c("form", {
+    on: {
+      submit: function submit($event) {
+        $event.preventDefault();
+        return _vm.onSubmit.apply(null, arguments);
+      }
+    }
+  }, [_c("fieldset", {
+    staticClass: "form-group mt-3"
+  }, [_c("input", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.email,
+      expression: "email"
+    }],
+    staticClass: "form-control form-control-lg",
+    "class": [{
+      "is-invalid": _vm.hasErrorFor("email") || _vm.$v.email.$dirty && !_vm.$v.email.required || !_vm.$v.email.email
+    }],
+    attrs: {
+      type: "text",
+      placeholder: "Email"
+    },
+    domProps: {
+      value: _vm.email
+    },
+    on: {
+      blur: function blur($event) {
+        return _vm.$v.email.$touch();
+      },
+      input: function input($event) {
+        if ($event.target.composing) return;
+        _vm.email = $event.target.value;
+      }
+    }
+  }), _vm._v(" "), _vm.$v.email.$dirty && !_vm.$v.email.required ? _c("div", {
+    staticClass: "invalid-feedback"
+  }, [_vm._v("Поле обязательно для заполнения")]) : _vm._e(), _vm._v(" "), _vm.$v.email.$dirty && !_vm.$v.email.email ? _c("div", {
+    staticClass: "invalid-feedback"
+  }, [_vm._v("Введите валидный email")]) : _vm._e()]), _vm._v(" "), _c("fieldset", {
+    staticClass: "form-group mt-3"
+  }, [_c("input", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.password,
+      expression: "password"
+    }],
+    staticClass: "form-control form-control-lg",
+    "class": [{
+      "is-invalid": _vm.hasErrorFor("password") || _vm.$v.password.$dirty && (!_vm.$v.password.required || !_vm.$v.password.minLength)
+    }],
+    attrs: {
+      type: "password",
+      placeholder: "Password"
+    },
+    domProps: {
+      value: _vm.password
+    },
+    on: {
+      blur: function blur($event) {
+        return _vm.$v.password.$touch();
+      },
+      input: function input($event) {
+        if ($event.target.composing) return;
+        _vm.password = $event.target.value;
+      }
+    }
+  }), _vm._v(" "), _vm.$v.password.$dirty && !_vm.$v.password.required ? _c("div", {
+    staticClass: "invalid-feedback"
+  }, [_vm._v("Поле обязательно для заполнения")]) : _vm._e(), _vm._v(" "), _vm.$v.password.$dirty && !_vm.$v.password.minLength ? _c("div", {
+    staticClass: "invalid-feedback"
+  }, [_vm._v("Минимальная длина пароля " + _vm._s(this.$v.password.$params.minLength.min) + " символов")]) : _vm._e()]), _vm._v(" "), _c("div", {
+    staticClass: "mb-2"
+  }, [_c("router-link", {
+    attrs: {
+      to: "/forgot"
+    }
+  }, [_vm._v("Forgot Password?")])], 1), _vm._v(" "), _c("button", {
+    staticClass: "btn btn-lg btn-outline-primary pull-xs-right mt-3",
+    attrs: {
+      disabled: _vm.isSubmitting || _vm.$v.$invalid
+    }
+  }, [_vm._v("\n                        Sign in\n                    ")])])], 1)])])]);
 };
 var staticRenderFns = [];
 render._withStripped = true;
@@ -5641,6 +5814,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _index__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./index */ "./resources/js/index.vue");
 /* harmony import */ var _store_index__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./store/index */ "./resources/js/store/index.js");
 /* harmony import */ var _store_modules_auth__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./store/modules/auth */ "./resources/js/store/modules/auth.js");
+/* harmony import */ var vuelidate__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! vuelidate */ "./node_modules/vuelidate/lib/index.js");
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -5654,9 +5828,13 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 
 
+
+//Vuelidate
+
 window.Vue = (__webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js")["default"]);
 Vue.use(vue_router__WEBPACK_IMPORTED_MODULE_5__["default"]);
 Vue.use((vue_cookie__WEBPACK_IMPORTED_MODULE_0___default()));
+Vue.use(vuelidate__WEBPACK_IMPORTED_MODULE_6__["default"]);
 
 /**
  * The following block of code may be used to automatically register your

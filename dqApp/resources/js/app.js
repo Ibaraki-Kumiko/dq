@@ -13,12 +13,14 @@ import index from "./index";
 import store from "./store/index";
 import {actionTypes as authGetterTypes, getterTypes} from "./store/modules/auth";
 
-
+//Vuelidate
+import Vuelidate from 'vuelidate'
 
 window.Vue = require('vue').default;
 
 Vue.use(VueRouter);
 Vue.use(VueCookie);
+Vue.use(Vuelidate)
 
 
 

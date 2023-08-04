@@ -3,6 +3,7 @@ import VueRouter from "vue-router";
 import HomePage from "../components/HomePage";
 import RegisterPage from "../views/RegisterPage";
 import LoginPage from "../views/LoginPage";
+import NotFound from "../components/NotFound";
 
 const routes = [
     {
@@ -25,6 +26,10 @@ const routes = [
     {
         path: '/logout',
         name: 'logout',
+    },
+    {
+        path: "/:notFound",
+        component: NotFound,
     },
 
 ]

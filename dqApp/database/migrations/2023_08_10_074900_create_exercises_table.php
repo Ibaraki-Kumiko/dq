@@ -19,6 +19,7 @@ class CreateExercisesTable extends Migration
             $table->string('translation');
             $table->integer('unit_id')->unsigned();
             $table-> foreign('unit_id')->references('id')->on('units');
+            $table->string('type')->nullable();
             $table->timestamps();
         });
     }

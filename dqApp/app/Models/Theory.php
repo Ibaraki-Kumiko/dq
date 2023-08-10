@@ -14,5 +14,11 @@ class Theory extends Model
         'slug',
         'description',
         'content',
+        'unit_id',
     ];
+
+    public function unit()
+    {
+        return $this->belongsTo(Unit::class);
+    }
 }

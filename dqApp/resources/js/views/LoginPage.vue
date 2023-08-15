@@ -99,7 +99,7 @@ export default {
         onSubmit() {
             this.$store.dispatch(actionTypes.login, {email: this.email, password: this.password})
                 .then((res) => {
-                    res.is_admin ?   this.$router.push({path: '/admin'}) : this.$router.push({path: '/home'})
+                    res.is_admin ?   this.$router.push({path: '/admin'}) : this.$router.push({path: '/'})
 
                 })
         },

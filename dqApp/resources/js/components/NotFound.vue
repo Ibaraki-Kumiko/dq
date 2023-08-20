@@ -40,16 +40,9 @@ export default {
 }
 </script>
 
-<style scoped lang="scss">
+<style  lang="scss">
 
-/* colors */
-$blue: #293b49;
-$pink: #fdabaf;
-$pink-light: #ffe0e6;
-$green: #04cba0;
-$green-dark: #01ac88;
-$white: white;
-
+@import "resources/sass/app.scss";
 
 a {
     text-decoration: none;
@@ -213,15 +206,5 @@ a {
     color: $blue;
 }
 
-.button {
-    margin-top: 4rem;
-    padding: 1.2rem 3rem;
-    color: $white;
-    background-color: $green;
-
-    &:hover {
-        background-color: $green-dark;
-    }
-}
 
 </style>

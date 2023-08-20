@@ -4,6 +4,7 @@ import HomePage from "../components/HomePage";
 import RegisterPage from "../views/RegisterPage";
 import LoginPage from "../views/LoginPage";
 import NotFound from "../components/NotFound";
+import ContactPage from "../components/ContactPage";
 
 const routes = [
     {
@@ -28,9 +29,15 @@ const routes = [
         name: 'logout',
     },
     {
+        path: "/contacts",
+        name: 'contacts',
+        component: ContactPage,
+    },
+    {
         path: "/:notFound",
         component: NotFound,
     },
+
 
 ]
 

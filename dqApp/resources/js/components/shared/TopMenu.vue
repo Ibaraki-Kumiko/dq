@@ -123,7 +123,8 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+@import "resources/sass/app.scss";
 .prev-pic {
     border-radius: 50%;
     width: 50px;
@@ -168,6 +169,6 @@ a.router-link-exact-active, a.router-link-exact-active > ion-icon, li.router-lin
 
 .navbar-brand {
 
-    color: #42b883;
+    color: $green;
 }
 </style>

@@ -11994,3 +11994,7 @@ textarea.form-control-lg {
 .button:hover {
   background-color: #01ac88;
 }
+.button:disabled {
+  background-color: gray;
+  cursor: not-allowed;
+}

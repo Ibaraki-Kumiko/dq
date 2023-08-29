@@ -8,6 +8,17 @@ require('./bootstrap');
 
 import VueRouter from "vue-router";
 import VueCookie from "vue-cookie"
+
+
+import PrimeVue from 'primevue/config';
+import ToastService from 'primevue/toastservice';
+import 'primevue/resources/primevue.min.css'
+
+//import 'primeflex/primeflex.css'
+import 'primeicons/primeicons.css'
+import 'primevue/resources/themes/md-light-indigo/theme.css'
+
+
 import router from './router/index'
 import index from "./index";
 import store from "./store/index";
@@ -16,11 +27,14 @@ import {actionTypes as authGetterTypes, getterTypes} from "./store/modules/auth"
 //Vuelidate
 import Vuelidate from 'vuelidate'
 
+
 window.Vue = require('vue').default;
 
 Vue.use(VueRouter);
 Vue.use(VueCookie);
 Vue.use(Vuelidate)
+Vue.use(PrimeVue)
+Vue.use(ToastService);
 
 
 

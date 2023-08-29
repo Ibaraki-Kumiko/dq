@@ -17,4 +17,15 @@
     &:hover {
         background-color: $green-dark;
     }
+    &:disabled {
+        background-color: gray;
+        cursor: not-allowed;
+    }
+
+
+
+
+
+
+
 }

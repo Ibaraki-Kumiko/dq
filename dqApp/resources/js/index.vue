@@ -1,6 +1,8 @@
 <template>
     <div class="container">
         <div class="content">
+            <Toast />
+
             <!-- <template v-if="isAdmin">
                  <admin-menu></admin-menu>
              </template>-->
@@ -19,31 +21,58 @@ import Footer from "./components/shared/Footer";
 import {mapState, mapGetters} from 'vuex'
 import {actionTypes as authGetterTypes} from './store/modules/auth'
 
+import Toast from 'primevue/toast';
+
+
 export default {
     name: "index",
     components: {
         TopMenu,
-        Footer
+        Footer,
+        Toast,
+
     },
     computed: {
+        toastMessage() {
+            return this.$store.state.toast.toastMessage;
+        },
+    },
+
+    watch: {
+        toastMessage(newMessage) {
+            if (newMessage) {
+                this.$toast.add({
+                    severity: 'success',
+                    summary: 'Успех',
+                    detail: newMessage,
+                    life: 3000,
+                });
+            }
+        },
+    },
+  /*  computed: {
         ...mapState({
-            /* isLoading: state => state.userProfile.isLoading,
-             error: state => state.userProfile.error*/
+            /!* isLoading: state => state.userProfile.isLoading,
+             error: state => state.userProfile.error*!/
         }),
         ...mapGetters({
-            /*   currentUser: authGetterTypes.currentUser,
-               isAdmin: 'isAdmin'*/
+            /!*   currentUser: authGetterTypes.currentUser,
+               isAdmin: 'isAdmin'*!/
 
 
         }),
         userProfileSlug() {
             return this.currentUser.nickname
         },
+    },*/
+    created() {
+
+
+    },
+    mounted() {
+
     },
 
-    mounted() {
-        /* console.log('current user for menu', this.$store.getters.isAdmin, this.isAdmin);*/
-    }
 }
 </script>
 

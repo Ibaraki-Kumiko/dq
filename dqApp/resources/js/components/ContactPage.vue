@@ -1,28 +1,71 @@
 <template>
     <div class="container">
-        <form class="contact100-form validate-form">
+        <!-- <ValidationErrors   v-if="validationErrors" :validation-errors="validationErrors"></ValidationErrors>&ndash;&gt;-->
+        <!--<div  v-if="hasErrorFor('email')">
+            Эти учетные данные не соответствуют нашим записям
+        </div>-->
+        <Message severity="error" v-if="errorMessage" :closable="false">{{ errorMessage }}</Message>
+        <form @submit.prevent="onSubmit" class="contact100-form validate-form">
             <span class="contact100-form-title">
             Contact Us
             </span>
-            <div class="wrap-input100 rs1-wrap-input100 validate-input" data-validate="Name is required">
+            <div class="wrap-input100 rs1-wrap-input100">
+
                 <span class="label-input100">Ваше имя</span>
-                <input class="input100" type="text" name="name" placeholder="Введите Ваше">
+
+                <input
+                    class="input100"
+                    type="text"
+                    name="name"
+
+                    v-model="name"
+                    @blur="$v.name.$touch()">
+                <!--:class="[{'is-invalid': hasErrorFor('name') || ($v.name.$dirty && (!$v.name.required))}]"-->
+                <!--  :placeholder="$v.name.$dirty && !$v.name.required ? '' : 'Введите Ваше имя'"-->
+
+
                 <span class="focus-input100"></span>
+                <div class="invalid">{{ $v.name.$error ? 'Поле обязательно для заполнения' : '' }}</div>
             </div>
-            <div class="wrap-input100 rs1-wrap-input100 validate-input" data-validate="Valid email is required: ex@abc.xyz">
+            <div class="wrap-input100 rs1-wrap-input100 validate-input">
                 <span class="label-input100">Email</span>
-                <input class="input100" type="text" name="email" placeholder="Введите email">
+                <input
+                    class="input100"
+                    type="text"
+                    name="email"
+
+                    v-model="email"
+                    @blur="$v.email.$touch()">
+                <!-- :class="[{'is-invalid': hasErrorFor('email') || ($v.email.$dirty && (!$v.email.required) || !$v.email.email)}]"-->
+                <!--  :placeholder="($v.email.$dirty && (!$v.email.required) || !$v.email.email) ? '' : 'Введите e-mail'"-->
                 <span class="focus-input100"></span>
+                <div class="invalid">{{
+                        $v.email.$dirty && !$v.email.required ? 'Поле обязательно для заполнения' : $v.email.$dirty && !$v.email.email ? 'Введите валидный email' : ''
+                    }}
+                </div>
+                <!--                <div class="invalid" v-if="$v.email.$dirty && !$v.email.email">Введите валидный email</div>-->
             </div>
-            <div class="wrap-input100 validate-input rs1-wrap-textarea100" data-validate="Message is required">
+            <div class="wrap-input100 validate-input rs1-wrap-textarea100">
                 <span class="label-input100">Сообщение</span>
-                <textarea class="input100" name="message" placeholder="Введите Ваше сообщение..."></textarea>
+                <textarea
+                    class="input100"
+                    name="message"
+                    @blur="$v.message.$touch()"
+                    v-model="message">
+                   <!--  :placeholder="$v.message.$dirty && !$v.message.required ? '' : 'Введите Ваше сообщение...'"-->
+                    <!-- :class="[{'is-invalid': hasErrorFor('message') || ($v.message.$dirty && !$v.message.required)}]"-->
+
+
+                </textarea>
+
                 <span class="focus-input100"></span>
+                <!--    <div class="invalid" v-if="$v.message.$dirty && !$v.message.required">Поле обязательно для заполнения</div>-->
+                <div class="invalid">{{ $v.message.$error ? 'Поле обязательно для заполнения' : '' }}</div>
             </div>
+
             <div class="container-contact100-form-btn">
-                <button class="button">
+                <button class="button" :disabled="isSubmitting || $v.$invalid">
                 <span>Submit
-                <i class="fa fa-long-arrow-right m-l-7" aria-hidden="true"></i>
                 </span>
                 </button>
             </div>
@@ -32,30 +75,35 @@
 </template>
 
 <script>
-import {actionTypes} from "../store/modules/auth";
+import {actionTypes} from "../store/modules/contacts";
 import {mapState} from "vuex"
-import ValidationErrors from "../shared/components/ValidationErrors";
+// import ValidationErrors from "../shared/components/ValidationErrors";
 
-import { required, minLength, email, sameAs, requiredIf, url } from 'vuelidate/lib/validators'
-import validationErrors from "../shared/mixin/validationErrors";
-
+import {required, email} from 'vuelidate/lib/validators'
+/*import validationErrors from "../shared/mixin/validationErrors";*/
+import Toast from 'primevue/toast';
+import Message from 'primevue/message';
 
 export default {
     name: "ContactPage",
-    mixins: validationErrors,
+    // mixins: validationErrors,
     components: {
-        ValidationErrors
+        // ValidationErrors
+        Toast,
+        Message
     },
     data() {
         return {
             email: '',
-            password: '',
+            name: '',
+            message: '',
+            errorMessage: null
         }
     },
     computed: {
         ...mapState({
-            isSubmitting: state => state.auth.isSubmitting,
-            validationErrors: state => state.auth.validationErrors
+            isSubmitting: state => state.contacts.isSubmitting,
+            validationErrors: state => state.contacts.validationErrors
         })
     },
     validations: {
@@ -64,25 +112,34 @@ export default {
             required,
             email,
         },
-        password: {
+        name: {
             required,
-            minLength: minLength(8),
+        },
+        message: {
+            required,
         },
     },
     methods: {
-        onSubmit() {
-            this.$store.dispatch(actionTypes.login, {email: this.email, password: this.password})
-                .then((res) => {
-                    res.is_admin ?   this.$router.push({path: '/admin'}) : this.$router.push({path: '/'})
-
-                })
+        removeMessages() {
+            console.log("Ädsd")
+            //this.messages = null;
         },
-        hasErrorFor(field){
-            if(this.$store.state.auth.validationErrors && this.$store.state.auth.validationErrors.hasOwnProperty(field)) {
-                console.log(this.$store.state.auth.validationErrors)
+        onSubmit() {
+            this.$store.dispatch(actionTypes.feedback, {email: this.email, name: this.name, message: this.message})
+                .then(() => {
+                    this.$store.commit('updateToastMessage', "Ваше сообщение успешно отправлено");
+                    this.$router.push({path: '/'})
+                }).catch(error =>
+                this.errorMessage = "Что-то пошло не так. Ваше сообщение не было отправлено. Попробуйте позже еще раз",
+            )
+
+
+        },
+        hasErrorFor(field) {
+            if (this.$store.state.contacts.validationErrors && this.$store.state.contacts.validationErrors.hasOwnProperty(field)) {
+                console.log(this.$store.state.contacts.validationErrors)
                 return true
-            }
-            else {
+            } else {
                 return null
             }
         }
@@ -92,6 +149,20 @@ export default {
 
 <style scoped lang="scss">
 @import "resources/sass/app.scss";
+
+
+.input100t:focus {
+    border-color: blue;
+    outline: none;
+}
+
+.invalid {
+    width: 100%;
+    margin-top: 0.25rem;
+    font-size: 0.875em;
+    min-height: 20px;
+    color: var(--bs-form-invalid-color);
+}
 
 .container {
     width: 100%;
@@ -115,28 +186,33 @@ input {
     outline: none;
     border: none
 }
+
 textarea {
     outline: none;
     border: none
 }
 
-textarea:focus,input:focus {
-    border-color: transparent!important
+textarea:focus, input:focus {
+    border-color: transparent !important
 }
 
 input:focus::-webkit-input-placeholder {
     color: transparent
 }
+
 textarea:focus::-webkit-input-placeholder {
     color: transparent
 }
+
 input::-webkit-input-placeholder {
     color: #555
 }
+
 textarea::-webkit-input-placeholder {
 
     color: #555
 }
+
 .contact100-form {
     width: 100%;
     display: -webkit-box;
@@ -166,21 +242,23 @@ textarea::-webkit-input-placeholder {
 }
 
 
-
 .wrap-input100 {
     position: relative;
-    border-bottom: 2px solid #d9d9d9;
+    //border-bottom: 2px solid #d9d9d9;
     padding-bottom: 13px;
-    margin-bottom: 65px;
+    //  margin-bottom: 65px;
 }
+
 .rs1-wrap-input100 {
-     width: calc((100% - 30px) / 2);
+    width: calc((100% - 30px) / 2);
 
 }
+
 .rs1-wrap-textarea100 {
     width: 100%
 }
 
+/*
 .focus-input100::before {
     content: "";
     display: block;
@@ -195,13 +273,14 @@ textarea::-webkit-input-placeholder {
     transition: all .4s;
     background: #ff4b5a;
 }
+*/
 
 .label-input100 {
- /*   font-family: Poppins-Regular,sans-serif;*/
+    /*   font-family: Poppins-Regular,sans-serif;*/
     font-size: 15px;
     color: #999;
     line-height: 1.5;
-    padding-left: 5px;
+    //  padding-left: 5px;
 }
 
 input.input100 {
@@ -211,11 +290,12 @@ input.input100 {
 .input100 {
     display: block;
     width: 100%;
-    background: 0 0;
+    //background: 0 0;
     font-size: 18px;
     color: #555;
     line-height: 1.2;
     padding: 0 5px;
+    border-radius: 5px;
 }
 
 input {
@@ -223,6 +303,7 @@ input {
     border: none;
 }
 
+/*
 .focus-input100 {
     position: absolute;
     display: block;
@@ -232,8 +313,9 @@ input {
     left: 0;
     pointer-events: none;
 }
+*/
 
-.focus-input100::before {
+/*.focus-input100::before {
     content: "";
     display: block;
     position: absolute;
@@ -246,7 +328,7 @@ input {
     -moz-transition: all .4s;
     transition: all .4s;
     background: #04cba0
-}
+}*/
 .container-contact100-form-btn {
     width: 100%;
     display: -webkit-box;
@@ -257,20 +339,22 @@ input {
     flex-wrap: wrap;
     margin-top: -25px;
 }
+
 input.input100 {
     height: 40px
 }
+
 textarea.input100 {
     min-height: 110px;
     padding-top: 9px;
     padding-bottom: 13px
 }
 
-.input100:focus+.focus-input100::before {
+.input100:focus + .focus-input100::before {
     width: 100%
 }
 
-.has-val.input100+.focus-input100::before {
+.has-val.input100 + .focus-input100::before {
     width: 100%
 }
 
@@ -285,10 +369,10 @@ textarea.input100 {
     padding: 0 20px;
     min-width: 160px;
     height: 50px;
-   /* background-color: #ff4b5a;*/
+    /* background-color: #ff4b5a;*/
     background-color: $green;
     border-radius: 25px;
-  /*  font-family: Poppins-Medium,sans-serif;*/
+    /*  font-family: Poppins-Medium,sans-serif;*/
     font-size: 16px;
     color: #fff;
     line-height: 1.2;
@@ -305,13 +389,13 @@ textarea.input100 {
 
 @media(max-width: 992px) {
     .wrap-contact100 {
-        padding:82px 80px 33px
+        padding: 82px 80px 33px
     }
 }
 
 @media(max-width: 768px) {
     .rs1-wrap-input100 {
-        width:100%
+        width: 100%
     }
 }
 
@@ -320,6 +404,7 @@ textarea.input100 {
         padding: 82px 15px 33px
     }
 }
+
 .alert-validate::before {
     content: attr(data-validate);
     position: absolute;
@@ -372,7 +457,7 @@ textarea.input100 {
 
 @media(max-width: 992px) {
     .alert-validate::before {
-        visibility:visible;
+        visibility: visible;
         opacity: 1
     }
 }

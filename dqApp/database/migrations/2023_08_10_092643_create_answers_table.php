@@ -15,7 +15,7 @@ class CreateAnswersTable extends Migration
     {
         Schema::create('answers', function (Blueprint $table) {
             $table->id();
-            $table->integer('exercise_id')->unsigned();
+            $table->unsignedBigInteger('exercise_id')->index();
             $table-> foreign('exercise_id')->references('id')->on('exercises');
             $table->json('data')->nullable();
             $table->timestamps();

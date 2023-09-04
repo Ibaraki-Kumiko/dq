@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Resources;
+namespace App\Http\Resources\Theory;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class Exercise extends JsonResource
+class TheoryResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -15,10 +15,10 @@ class Exercise extends JsonResource
     public function toArray($request)
     {
         return [
-            'id' => $this->id,
-            'name' => $this->name,
-            'translation' => $this->translation,
-            'answer' => $this->answer,
+            'content' => $this->content,
+            'description'=> $this->description,
+            'title'=> $this->title,
+            'unit_id' => $this->unit_id
         ];
     }
 }

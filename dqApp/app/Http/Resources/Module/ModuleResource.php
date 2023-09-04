@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Http\Resources;
+namespace App\Http\Resources\Module;
 
 use App\Http\Resources\Unit\UnitResource;
+
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class ModuleResource extends JsonResource

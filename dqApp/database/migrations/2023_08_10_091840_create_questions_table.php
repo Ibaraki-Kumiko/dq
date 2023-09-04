@@ -18,7 +18,7 @@ class CreateQuestionsTable extends Migration
             $table->string('question');
             $table->string('translation');
             $table->string('answer');
-            $table->integer('exercise_id')->unsigned();
+            $table->unsignedBigInteger('exercise_id')->index();
             $table-> foreign('exercise_id')->references('id')->on('exercises');
             $table->timestamps();
         });

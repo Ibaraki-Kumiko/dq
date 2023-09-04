@@ -44,7 +44,7 @@ class UnitController extends Controller
      * Display the specified resource.
      *
      * @param  \App\Models\Unit  $unit
-     * @return \Illuminate\Http\Response
+     * @return TheoryResource
      */
 
         public function show(Request $request)

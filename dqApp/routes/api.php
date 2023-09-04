@@ -39,6 +39,11 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('user', [AuthController::class, 'user']);
     Route::post('logout', [AuthController::class, 'logout']);
 
-    Route::get('/modules', [\App\Http\Controllers\ModuleController::class, 'index']);
-});
 
+});
+//modules
+Route::get('/modules', [\App\Http\Controllers\ModuleController::class, 'index']);
+Route::get('/modules/{id}', [\App\Http\Controllers\ModuleController::class, 'show']);
+
+//UNIT
+Route::get('/modules/{id}/{unit_id}', [\App\Http\Controllers\UnitController::class, 'show']);

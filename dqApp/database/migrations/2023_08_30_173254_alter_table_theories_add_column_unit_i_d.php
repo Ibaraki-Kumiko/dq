@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateExercisesTable extends Migration
+class AlterTableTheoriesAddColumnUnitID extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,10 @@ class CreateExercisesTable extends Migration
      */
     public function up()
     {
-        Schema::create('exercises', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->string('translation');
+        Schema::table('theories', function (Blueprint $table) {
+
             $table->unsignedBigInteger('unit_id')->index();
-            $table-> foreign('unit_id')->references('id')->on('units');
-            $table->string('type')->nullable();
-            $table->timestamps();
+
         });
     }
 
@@ -31,6 +27,8 @@ class CreateExercisesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('exercises');
+        Schema::table('theories', function (Blueprint $table) {
+            $table->dropColumn('unit_id');
+        });
     }
 }

@@ -1,11 +1,10 @@
 <?php
 
-namespace App\Http\Resources\Unit;
+namespace App\Http\Resources\Exercise;
 
-use App\Http\Resources\Exercise\ExerciseResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class UnitResource extends JsonResource
+class ExerciseResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -19,8 +18,7 @@ class UnitResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'translation' => $this->translation,
-            'exercises' => ExerciseResource::collection($this->exercises),
-            'theory' => $this->theory()->exists()
+            'answer' => $this->answer,
         ];
     }
 }

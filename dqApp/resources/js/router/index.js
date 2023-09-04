@@ -5,6 +5,9 @@ import RegisterPage from "../views/RegisterPage";
 import LoginPage from "../views/LoginPage";
 import NotFound from "../components/NotFound";
 import ContactPage from "../components/ContactPage";
+import Modules from "../views/Modules";
+import ModulePage from "../views/ModulePage";
+import UnitPage from "../views/UnitPage";
 
 const routes = [
     {
@@ -34,9 +37,26 @@ const routes = [
         component: ContactPage,
     },
     {
+        path: '/modules',
+        name: 'modules',
+        component: Modules
+    },
+    {
+        path: '/modules/:id',
+        name: 'module',
+        component: ModulePage
+    },
+    {
+        path: '/modules/:id/:unit_id',
+        name: 'unit',
+        component: UnitPage
+    },
+    {
         path: "/:notFound",
         component: NotFound,
     },
+
+
 
 
 ]

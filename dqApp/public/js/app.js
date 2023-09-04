@@ -5935,7 +5935,7 @@ var render = function render() {
       exact: "",
       "active-class": "active"
     }
-  }, [_vm._v("\n                Главная\n            ")])], 1), _vm._v(" "), _vm._m(0), _vm._v(" "), _vm._m(1), _vm._v(" "), _c("li", {
+  }, [_vm._v("\n                Главная\n            ")])], 1), _vm._v(" "), _vm._m(0), _vm._v(" "), _c("li", {
     staticClass: "nav-item"
   }, [_c("router-link", {
     staticClass: "nav-link px-2 text-muted",
@@ -5961,17 +5961,6 @@ var staticRenderFns = [function () {
       href: "#"
     }
   }, [_vm._v("О нас")])]);
-}, function () {
-  var _vm = this,
-    _c = _vm._self._c;
-  return _c("li", {
-    staticClass: "nav-item"
-  }, [_c("a", {
-    staticClass: "nav-link px-2 text-muted",
-    attrs: {
-      href: "#"
-    }
-  }, [_vm._v("Контакты")])]);
 }];
 render._withStripped = true;
 

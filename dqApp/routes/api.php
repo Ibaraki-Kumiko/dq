@@ -21,6 +21,13 @@ use Illuminate\Support\Facades\Route;
         return $request->user();
     });*/
 
+Route::get('search', function() {
+    $query = ''; // <-- Change the query for testing.
+
+    $articles = \App\Models\Dictionary::search($query)->get();
+
+    return $articles;
+});
 
 
 Route::post('register', [AuthController::class, 'register']);

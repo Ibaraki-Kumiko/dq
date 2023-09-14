@@ -9,14 +9,16 @@ require('./bootstrap');
 import VueRouter from "vue-router";
 import VueCookie from "vue-cookie"
 
-
+//PrimeVue
 import PrimeVue from 'primevue/config';
 import ToastService from 'primevue/toastservice';
 import 'primevue/resources/primevue.min.css'
-
-//import 'primeflex/primeflex.css'
 import 'primeicons/primeicons.css'
 import 'primevue/resources/themes/md-light-indigo/theme.css'
+
+
+//Algolia Search
+import InstantSearch from 'vue-instantsearch'
 
 
 import router from './router/index'
@@ -35,6 +37,7 @@ Vue.use(VueCookie);
 Vue.use(Vuelidate)
 Vue.use(PrimeVue)
 Vue.use(ToastService);
+Vue.use(InstantSearch);
 
 
 

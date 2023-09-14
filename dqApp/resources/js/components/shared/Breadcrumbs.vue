@@ -1,0 +1,51 @@
+<template>
+    <div class="breadcrumbs">
+    <span v-for="(crumb, index) in crumbs" :key="index">
+      <router-link v-if="index !== crumbs.length - 1" :to="crumb.path">{{ crumb.text }}</router-link>
+      <span v-else>{{ crumb.text }}</span>
+      <span v-if="index !== crumbs.length - 1"> > </span>
+    </span>
+    </div>
+</template>
+
+<script>
+export default {
+    name: "Breadcrumbs",
+    data() {
+        return {
+            crumbs: [],
+        };
+    },
+    watch: {
+        $route(to) {
+            this.generateCrumbs(to);
+        },
+    },
+    mounted() {
+        this.generateCrumbs(this.$route);
+    },
+    methods: {
+        generateCrumbs(route) {
+            const segments = route.path.split('/').filter(segment => segment);
+
+            this.crumbs = segments.map((segment, index) => {
+                return {
+                    text: segment,
+                    path: `/${segments.slice(0, index + 1).join('/')}`,
+                };
+            });
+        },
+    },
+}
+</script>
+
+<style scoped>
+.breadcrumbs {
+    font-size: 14px;
+    line-height: 15px;
+    letter-spacing: .2px;
+    margin: 1em 0;
+    font-family: Px,cv-linear,l,monospace;
+    text-decoration: none;
+}
+</style>

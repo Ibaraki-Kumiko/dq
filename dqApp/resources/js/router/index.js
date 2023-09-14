@@ -5,6 +5,8 @@ import RegisterPage from "../views/RegisterPage";
 import LoginPage from "../views/LoginPage";
 import NotFound from "../components/NotFound";
 import ContactPage from "../components/ContactPage";
+import AlgoliaSearch from "../views/SearchForm";
+
 import Modules from "../views/Modules";
 import ModulePage from "../views/ModulePage";
 import UnitPage from "../views/UnitPage";
@@ -37,6 +39,12 @@ const routes = [
         component: ContactPage,
     },
     {
+        path: '/dictionary',
+        name: 'dictionary',
+        component: AlgoliaSearch
+    },
+
+    {
         path: '/modules',
         name: 'modules',
         component: Modules
@@ -55,8 +63,6 @@ const routes = [
         path: "/:notFound",
         component: NotFound,
     },
-
-
 
 
 ]

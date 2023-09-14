@@ -17,17 +17,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-  /*  Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-        return $request->user();
-    });*/
-
-Route::get('search', function() {
-    $query = ''; // <-- Change the query for testing.
-
-    $articles = \App\Models\Dictionary::search($query)->get();
-
-    return $articles;
-});
 
 
 Route::post('register', [AuthController::class, 'register']);
@@ -38,10 +27,7 @@ Route::post('reset', [PasswordController::class, 'reset']);
 
 Route::post('/feedback', [FeedbackController::class, 'submitForm'])->name('submit.form');
 
-/*Route::get('/user', function (Request $request) {
-    dd($request->user());
-    return $request->user();
-});*/
+
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('user', [AuthController::class, 'user']);
     Route::post('logout', [AuthController::class, 'logout']);
@@ -54,3 +40,9 @@ Route::get('/modules/{id}', [\App\Http\Controllers\ModuleController::class, 'sho
 
 //UNIT
 Route::get('/modules/{id}/{unit_id}', [\App\Http\Controllers\UnitController::class, 'show']);
+
+//Dictionary
+Route::get('/dictionary/{slug}', [\App\Http\Controllers\DictionaryController::class, 'show']);
+Route::post('/dictionary/',  [\App\Http\Controllers\DictionaryController::class, 'store']);
+
+

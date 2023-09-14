@@ -5,11 +5,17 @@ import RegisterPage from "../views/RegisterPage";
 import LoginPage from "../views/LoginPage";
 import NotFound from "../components/NotFound";
 import ContactPage from "../components/ContactPage";
-import AlgoliaSearch from "../views/SearchForm";
+
 
 import Modules from "../views/Modules";
 import ModulePage from "../views/ModulePage";
 import UnitPage from "../views/UnitPage";
+
+import AlgoliaSearch from "../views/SearchForm";
+import termPage from "../views/TermPage";
+import UploadTerms from "../views/admin/UploadTerms";
+
+
 
 const routes = [
     {
@@ -38,11 +44,6 @@ const routes = [
         name: 'contacts',
         component: ContactPage,
     },
-    {
-        path: '/dictionary',
-        name: 'dictionary',
-        component: AlgoliaSearch
-    },
 
     {
         path: '/modules',
@@ -59,6 +60,23 @@ const routes = [
         name: 'unit',
         component: UnitPage
     },
+    {
+        path: '/dictionary',
+        name: 'dictionary',
+        component: AlgoliaSearch
+    },
+    {
+        path: '/dictionary/:slug',
+        name: 'term',
+        component: termPage
+    },
+
+    {
+        path: '/upload',
+        name: 'upload',
+        component: UploadTerms
+    },
+
     {
         path: "/:notFound",
         component: NotFound,

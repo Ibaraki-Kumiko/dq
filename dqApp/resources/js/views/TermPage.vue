@@ -1,23 +1,26 @@
 <template>
     <div>
         <div>
-            <Breadcrumbs />
+            <Breadcrumbs/>
         </div>
         <div class="term">
             <h1 class="term__title">{{ this.term }}</h1>
         </div>
         <p>{{ this.type }}</p>
-<!--        <p>Lautschrift </p>-->
+        <!--        <p>Lautschrift </p>-->
         <div>
             <h2>Значения</h2>
             <p>{{ this.definition }}</p>
-            <dl class="note"><dt class="note__title">Примеры</dt>
+            <dl class="note">
+                <dt class="note__title">Примеры</dt>
                 <dd>
-                    <ul class="note__list"><li>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam</li>
-                    </ul></dd>
+                    <ul class="note__list">
+                        <li>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam</li>
+                    </ul>
+                </dd>
             </dl>
 
-    </div>
+        </div>
     </div>
 </template>
 
@@ -39,9 +42,7 @@ export default {
             units: []
         }
     },
-    props: {
-
-    },
+    props: {},
     created() {
         const slug = this.$route.params.slug
         this.loading = true;
@@ -64,23 +65,25 @@ export default {
 .term {
     margin: 10px 0 0.5em;
 }
+
 .term__title {
     font-size: 38px;
     display: inline-block;
     vertical-align: baseline;
     margin: 0;
-    font-family: T,cv-linear,l,sans-serif;
+    font-family: T, cv-linear, l, sans-serif;
     line-height: 45px;
     font-weight: 700;
 }
+
 .note {
-    background:
-        #a0ebda;
+    background: #a0ebda;
     padding: 20px;
     margin: 1em 0;
     outline: #a0ebda solid 5px;
-    font-family: T,cv-linear,l,sans-serif;
+    font-family: T, cv-linear, l, sans-serif;
 }
+
 dl {
     display: block;
     margin-block-start: 1em;

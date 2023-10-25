@@ -2,23 +2,19 @@
     <div class="container">
         <div class="row">
             <div>
-                <h4>{{ this.title}}</h4>
-                <div>{{ this.description}}</div>
-              <div>{{ this.content}}</div>
-
+                <Breadcrumbs/>
             </div>
+            <theory-page></theory-page>
         </div>
     </div>
 </template>
 
 <script>
-//import TheoryPage from "./TheoryPage";
+import TheoryPage from "./TheoryPage";
+import Breadcrumbs from '../components/shared/Breadcrumbs';
 
 export default {
     name: "UnitPage",
- /*   props: {
-        unit: Object
-    }*/
     data() {
         return {
             loading: false,
@@ -28,19 +24,20 @@ export default {
         }
     },
     components: {
-       // TheoryPage
+        Breadcrumbs,
+      TheoryPage
     },
     created() {
-        const unitId = this.$route.params.unit_id
-        const moduleId = this.$route.params.id
+        const module_slug =  this.$route.params.slug
+        const unit_slug =  this.$route.params.unit_slug
+
         this.loading = true;
         axios
-            .get(`/modules/${moduleId}/${unitId}`)
+            .get(`/modules/${module_slug}/${unit_slug}`)
             .then(response => {
                this.title = response.data.data.title;
                 this.content = response.data.data.content
                 this.description = response.data.data.description
-
             })
             .then(() => (this.loading = false));
     },

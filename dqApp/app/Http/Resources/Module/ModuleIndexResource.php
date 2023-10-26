@@ -9,7 +9,7 @@ class ModuleIndexResource extends JsonResource
     /**
      * Transform the resource into an array.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return array|\Illuminate\Contracts\Support\Arrayable|\JsonSerializable
      */
     public function toArray($request)
@@ -17,8 +17,9 @@ class ModuleIndexResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
-            'translation'=> $this->translation,
-            //'units'=> $this->units
+            'translation' => $this->translation,
+            'slug' => $this->slug,
+            'status' => $this->status
             //  'units' => UnitResource::collection($this->units),
         ];
     }

@@ -3,10 +3,6 @@
 namespace App\Http\Controllers;
 
 
-
-
-
-
 use App\Http\Resources\Module\ModuleIndexResource;
 use App\Http\Resources\Module\ModuleResource;
 use App\Models\Module;
@@ -20,11 +16,9 @@ class ModuleController extends Controller
             Module::all());
     }
 
-    public function show($id)
+    public function show($slug)
     {
-
-        $module = Module::findOrFail($id);
-
+        $module = Module::where('slug', $slug)->firstOrFail();
         return new ModuleResource($module);
     }
 }

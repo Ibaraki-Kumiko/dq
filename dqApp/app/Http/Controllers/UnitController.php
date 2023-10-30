@@ -6,6 +6,7 @@ use App\Http\Resources\Theory\TheoryResource;
 use App\Models\Theory;
 use App\Models\Unit;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class UnitController extends Controller
 {
@@ -47,11 +48,12 @@ class UnitController extends Controller
      * @return TheoryResource
      */
 
-        public function show(Request $request)
+        public function show($modul_slug, $unit_slug)
     {
-        $id = $request->id;
-        $unit_id = $request->unit_id;
-        $theory = Theory::where('unit_id', $unit_id)->firstOrFail();
+
+        $theory = Theory::where('slug', "verben-mit-prapositionalem-objekt")->first();
+
+
         return new TheoryResource($theory);
 
     }

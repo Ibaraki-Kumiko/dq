@@ -30,6 +30,7 @@ export default {
 
     created() {
         const moduleId = this.$route.params.id
+        this.$store.commit('setLoading', true);
         this.loading = true;
         axios
             .get(`/modules/${moduleId}`)
@@ -38,7 +39,12 @@ export default {
                 this.translation = response.data.data.translation
                 this.units = response.data.data.units
             })
-            .then(() => (this.loading = false));
+            .then(() =>
+            {
+                this.$store.commit('setLoading', false);
+                (this.loading = false)
+            }
+                );
     },
 }
 </script>

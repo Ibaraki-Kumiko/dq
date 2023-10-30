@@ -18,7 +18,8 @@ class TheoryResource extends JsonResource
             'content' => $this->content,
             'description'=> $this->description,
             'title'=> $this->title,
-            'unit_id' => $this->unit_id
+            'unit_id' => $this->unit_id,
+            'slug' => $this->slug
         ];
     }
 }

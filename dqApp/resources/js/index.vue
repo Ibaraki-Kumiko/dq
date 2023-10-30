@@ -2,14 +2,17 @@
     <div class="container">
         <div class="content">
             <Toast />
-
+            <EllipsisLoader :color="'#54f1d2'" :loading="loading"></EllipsisLoader>
             <!-- <template v-if="isAdmin">
                  <admin-menu></admin-menu>
              </template>-->
-            <template v-if="!isAdmin">
+<!--            <template v-if="!isAdmin">
+                <TopMenu></TopMenu>
+            </template>-->
+            <template>
                 <TopMenu></TopMenu>
             </template>
-            <router-view></router-view>
+            <router-view v-show="!loading"></router-view>
         </div>
         <Footer></Footer>
     </div>
@@ -18,6 +21,7 @@
 <script>
 import TopMenu from "./components/shared/TopMenu";
 import Footer from "./components/shared/Footer";
+import EllipsisLoader from "./components/shared/EllipsisLoader";
 import {mapState, mapGetters} from 'vuex'
 import {actionTypes as authGetterTypes} from './store/modules/auth'
 
@@ -30,12 +34,17 @@ export default {
         TopMenu,
         Footer,
         Toast,
+        EllipsisLoader
 
     },
     computed: {
         toastMessage() {
             return this.$store.state.toast.toastMessage;
         },
+
+            loading() {
+                return this.$store.state.loading;
+            }
     },
 
     watch: {

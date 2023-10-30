@@ -11998,3 +11998,21 @@ textarea.form-control-lg {
   background-color: gray;
   cursor: not-allowed;
 }
+
+.btn-answer {
+  background-color: rgba(4, 203, 160, 0.5294117647);
+  transition: background-color 0.3s;
+}
+
+.btn-answer:hover {
+  background-color: #04cba0;
+}
+
+.btn-reset, .btn-show {
+  background-color: rgba(255, 166, 0, 0.4);
+  transition: background-color 0.3s;
+}
+
+.btn-reset:hover, .btn-show:hover {
+  background-color: #ffa600;
+}

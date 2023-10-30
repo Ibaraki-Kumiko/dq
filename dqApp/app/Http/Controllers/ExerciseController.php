@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Exercise;
+use App\Models\Unit;
 use Illuminate\Http\Request;
 
 class ExerciseController extends Controller
@@ -12,10 +13,12 @@ class ExerciseController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index($slug)
     {
-        $unit_id = $request->unit_id;
-        $exercises = Exercise::where('unit_id', $unit_id)->get();
+       // $unit_id = $request->unit_id;
+        $unit= Unit::where('slug', $slug)->firstOrFail();
+
+        $exercises = Exercise::where('unit_id', $unit->id)->get();
         return $exercises;
     }
 
@@ -44,7 +47,7 @@ class ExerciseController extends Controller
      * Display the specified resource.
      *
      * @param  \App\Models\Exercise  $exercise
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection|\Illuminate\Database\Eloquent\Model|\Illuminate\Http\Response
      */
    // public function show(Exercise $exercise)
     public function show(Request $request)
@@ -52,7 +55,7 @@ class ExerciseController extends Controller
         $id = $request->id;
         $exercise = Exercise::findOrFail($id);
         $questions = $exercise->questions()->get();
-        $item =     Exercise::with('questions', 'options:exercise_id,options')->findOrFail($id);
+        $item = Exercise::with('questions', 'options:exercise_id,options')->findOrFail($id);
         return $item;
     }
 

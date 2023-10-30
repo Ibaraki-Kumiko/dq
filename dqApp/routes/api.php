@@ -36,13 +36,26 @@ Route::middleware('auth:sanctum')->group(function () {
 });
 //modules
 Route::get('/modules', [\App\Http\Controllers\ModuleController::class, 'index']);
-Route::get('/modules/{id}', [\App\Http\Controllers\ModuleController::class, 'show']);
+Route::get('/modules/{slug}', [\App\Http\Controllers\ModuleController::class, 'show']);
 
 //UNIT
-Route::get('/modules/{id}/{unit_id}', [\App\Http\Controllers\UnitController::class, 'show']);
+//Route::get('/modules/{id}/{unit_id}', [\App\Http\Controllers\UnitController::class, 'show']);
+Route::get('/modules/{module_slug}/{unit_slug}', [\App\Http\Controllers\UnitController::class, 'show']);
 
 //Dictionary
 Route::get('/dictionary/{slug}', [\App\Http\Controllers\DictionaryController::class, 'show']);
 Route::post('/dictionary/',  [\App\Http\Controllers\DictionaryController::class, 'store']);
 
 
+//Exercise
+Route::get('/exercise/{id}', [\App\Http\Controllers\ExerciseController::class, 'show']);
+//Route::get('/exercises/{unit_id}', [\App\Http\Controllers\ExerciseController::class, 'index']);
+Route::get('/exercises/{slug}', [\App\Http\Controllers\ExerciseController::class, 'index']);
+
+//OPTIONS
+Route::get('/options/{id}', [\App\Http\Controllers\OptionController::class, 'show']);
+
+
+//Answers
+Route::post('/check/{id}', [\App\Http\Controllers\AnswerController::class, 'check']);
+Route::get('/answers/{id}', [\App\Http\Controllers\AnswerController::class, 'show']);

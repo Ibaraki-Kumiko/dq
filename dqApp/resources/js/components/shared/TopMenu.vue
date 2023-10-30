@@ -65,6 +65,14 @@
 
             <template v-if="isAnonymous">
                 <li class="nav-item">
+                    <router-link class="nav-link" :to="{name: 'modules'}" exact active-class="active">Грамматика
+                    </router-link>
+                </li>
+                <li class="nav-item">
+                    <router-link class="nav-link" :to="{name: 'dictionary'}" exact active-class="active">Словарь
+                    </router-link>
+                </li>
+                <li class="nav-item">
                     <router-link class="nav-link" :to="{name: 'login'}" active-class="active"> Sign in</router-link>
                 </li>
 

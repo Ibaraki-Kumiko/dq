@@ -22,10 +22,21 @@
         cursor: not-allowed;
     }
 
+}
+.btn-answer {
+    background-color: #04cba087;
+    transition: background-color 0.3s;
+}
 
+.btn-answer:hover {
+    background-color: #04cba0;
+}
 
+.btn-reset, .btn-show {
+    background-color: #ffa60066;
+    transition: background-color 0.3s;
+}
 
-
-
-
+.btn-reset:hover, .btn-show:hover {
+    background-color: #ffa600;
 }

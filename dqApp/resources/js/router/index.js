@@ -1,19 +1,22 @@
 import VueRouter from "vue-router";
 
-import HomePage from "../components/HomePage";
+import HomePage from "../views/HomePage";
 import RegisterPage from "../views/RegisterPage";
 import LoginPage from "../views/LoginPage";
-import NotFound from "../components/NotFound";
-import ContactPage from "../components/ContactPage";
+import NotFound from "../views/NotFoundPage";
+import ContactPage from "../views/ContactPage";
 
-
-import Modules from "../views/Modules";
-import ModulePage from "../views/ModulePage";
 import UnitPage from "../views/UnitPage";
-
 import AlgoliaSearch from "../views/SearchForm";
 import termPage from "../views/TermPage";
 import UploadTerms from "../views/admin/UploadTerms";
+import Exercise from "../views/Exercise";
+
+import Modules from "../views/ModulesPage";
+import UnitsPage from "../views/UnitsPage";
+import ExercisesPage from "../views/ExercisesPage";
+import TheoryPage from "../views/TheoryPage";
+
 
 
 
@@ -48,15 +51,17 @@ const routes = [
     {
         path: '/modules',
         name: 'modules',
-        component: Modules
+        component: Modules,
+        meta: { label: 'Грамматика' }
     },
+
     {
-        path: '/modules/:id',
+        path: '/modules/:slug',
         name: 'module',
-        component: ModulePage
+        component: UnitsPage
     },
     {
-        path: '/modules/:id/:unit_id',
+        path: '/modules/:slug/:unit_slug',
         name: 'unit',
         component: UnitPage
     },
@@ -75,6 +80,23 @@ const routes = [
         path: '/upload',
         name: 'upload',
         component: UploadTerms
+    },
+
+    {
+        path: '/modules/:id/:unit_id/exercises/',
+        name: 'exercises',
+        component: ExercisesPage
+    },
+
+    {
+        path: '/modules/:module_slug/:unit_slug/exercises/:exercise_id',
+        name: 'common',
+        component: Exercise
+    },
+
+    {
+        path: '/testTheory',
+        component: TheoryPage
     },
 
     {

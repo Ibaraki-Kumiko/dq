@@ -11,9 +11,12 @@ Vue.use(Vuex, VueCookies, VueCookie)
 
 export default new Vuex.Store({
     state: {
+        loading: false
     },
     mutations: {
-
+        setLoading(state, payload) {
+            state.loading = payload;
+        }
 
     },
     getters: {

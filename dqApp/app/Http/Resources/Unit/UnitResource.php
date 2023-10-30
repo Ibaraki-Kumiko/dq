@@ -20,7 +20,8 @@ class UnitResource extends JsonResource
             'name' => $this->name,
             'translation' => $this->translation,
             'exercises' => ExerciseResource::collection($this->exercises),
-            'theory' => $this->theory()->exists()
+            'theory' => $this->theory()->exists(),
+            'slug' => $this->slug
         ];
     }
 }

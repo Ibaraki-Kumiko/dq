@@ -1,107 +1,115 @@
 <template>
-    <ais-instant-search
-        :search-client="searchClient"
-        index-name="terms"
-        class="container"
-        :search-function="searchFunction"
-    >
-        <div class="row">
-            <ais-configure
-                :hits-per-page.camel="10"
-                :enable-rules.camel="false">
+    <div>
+        <div>
+            <Breadcrumbs/>
+        </div>
+        <ais-instant-search
+            :search-client="searchClient"
+            index-name="terms"
+            class="container"
+            :search-function="searchFunction"
+        >
+            <div class="row">
+                <ais-configure
+                    :hits-per-page.camel="10"
+                    :enable-rules.camel="false">
 
-                <template v-slot="{ searchParameters, refine }" @loadstart
-                    ="refine({
+                    <template v-slot="{ searchParameters, refine }" @loadstart
+                        ="refine({
         ...searchParameters,
         enableRules: !searchParameters.enableRules,
       })">
 
-                </template>
-            </ais-configure>
-
-
-
-            <div class="search-block col-md-12 col-sm-12">
-                <ais-search-box
-                    placeholder=""
-                    :autofocus="true"
-                    show-loading-indicator
-                    reset-title="Remove the query"
-                >
-
-
-                </ais-search-box>
-
-                <ais-state-results >
-                    <template v-slot="{ results: { hits, query } }">
-
-                        <table class="table" v-if="query.length > 0 ">
-
-                            <thead >
-                            <tr>
-                                <th scope="col">
-                                    <h1>
-                                        Результаты для <b>{{query}}</b>
-                                    </h1>
-
-                                </th>
-                            </tr>
-                            </thead>
-                            <ais-hits class="table-caption" v-if="hits.length > 0">
-                                <template v-slot="{items}">
-                                    <tr v-for="item in items" :key="item.objectID">
-                                        <td @click="sendEvent(items)">
-                                            <div class="vignette__label">
-                                                <router-link class="phrase_link"
-                                                             :to="'/dictionary/' + item.term"
-
-
-                                                >
-                                                    <ais-highlight
-                                                        attribute="term"
-                                                        :hit="item"
-                                                        highlighted-tag-name="em"
-                                                    />
-                                                </router-link>
-                                            </div>
-
-                                        </td>
-
-                                    </tr>
-                                </template>
-                            </ais-hits>
-                            <tr  v-else class="no-results">
-                                <td>Ничего не найдено по запросу: {{ query }}.</td>
-                            </tr>
-                        </table>
-                        <div v-else class="no-results">
-                        </div>
                     </template>
-                </ais-state-results>
+                </ais-configure>
 
-                <ais-pagination
-                    class="pagination"
-                    :show-first="true"
-                    :show-previous="true"
-                    :show-next="true"
-                    :show-last="true"
-                    :padding="2"
-                    :class-names="{
+
+
+                <div class="search-block col-md-12 col-sm-12">
+                    <ais-search-box
+                        placeholder=""
+                        :autofocus="true"
+                        show-loading-indicator
+                        reset-title="Remove the query"
+                    >
+
+
+                    </ais-search-box>
+
+                    <ais-state-results >
+                        <template v-slot="{ results: { hits, query } }">
+
+                            <table class="table" v-if="query.length > 0 ">
+
+                                <thead >
+                                <tr>
+                                    <th scope="col">
+                                        <h1>
+                                            Результаты для <b>{{query}}</b>
+                                        </h1>
+
+                                    </th>
+                                </tr>
+                                </thead>
+                                <ais-hits class="table-caption" v-if="hits.length > 0">
+                                    <template v-slot="{items}">
+                                        <tr v-for="item in items" :key="item.objectID">
+                                            <td @click="sendEvent(items)">
+                                                <div class="vignette__label">
+                                                    <router-link class="phrase_link"
+                                                                 :to="'/dictionary/' + item.term"
+
+
+                                                    >
+                                                        <ais-highlight
+                                                            attribute="term"
+                                                            :hit="item"
+                                                            highlighted-tag-name="em"
+                                                        />
+                                                    </router-link>
+                                                </div>
+
+                                            </td>
+
+                                        </tr>
+                                    </template>
+                                </ais-hits>
+                                <tr  v-else class="no-results">
+                                    <td>Ничего не найдено по запросу: {{ query }}.</td>
+                                </tr>
+                            </table>
+                            <div v-else class="no-results">
+                            </div>
+                        </template>
+                    </ais-state-results>
+
+                    <ais-pagination
+                        class="pagination"
+                        :show-first="true"
+                        :show-previous="true"
+                        :show-next="true"
+                        :show-last="true"
+                        :padding="2"
+                        :class-names="{
                          'ais-Pagination': 'MyCustomPagination',
                          'ais-Pagination-link': 'MyCustomLinkPagination'
                     }"
-                />
+                    />
+
+                </div>
 
             </div>
 
-        </div>
 
+        </ais-instant-search>
+    </div>
 
-    </ais-instant-search>
 </template>
 
 <script>
+import Breadcrumbs from '../components/shared/Breadcrumbs';
 import algoliasearch from 'algoliasearch/lite';
+
 import 'instantsearch.css/themes/satellite-min.css';
 import {
     AisInstantSearch,
@@ -120,6 +128,8 @@ import {
 export default {
     name: "SearchForm",
     components: {
+        Breadcrumbs,
+
         AisInstantSearch,
         AisSearchBox,
         AisConfigure,
@@ -165,18 +175,6 @@ export default {
         };
 
     },
-    mounted() {
-        document.onreadystatechange = () => {
-            if (document.readyState == "complete") {
-
-                this.$nextTick(() => {
-                })
-
-            }
-        }
-
-    },
-
     methods: {
         sendEvent(item) {
         },
@@ -203,8 +201,6 @@ export default {
 
 
 .search-block {
-
-
     margin-bottom: 20px;
 }
 
@@ -222,7 +218,6 @@ export default {
 }
 
 .MyCustomLinkPagination {
-
     background-color: #8ab029;
 }
 

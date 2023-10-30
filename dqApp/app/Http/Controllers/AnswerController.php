@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\AnswerResource;
 use App\Models\Answer;
 use App\Http\Requests\StoreAnswerRequest;
 use App\Http\Requests\UpdateAnswerRequest;
@@ -44,10 +45,11 @@ class AnswerController extends Controller
      * Display the specified resource.
      *
      * @param  \App\Models\Answer  $answer
-     * @return \Illuminate\Http\Response
+     * @return AnswerResource
      */
-    public function show(Answer $id)
+    public function show($id)
     {
+
         $answers = Answer::where('exercise_id', $id)->first();
         return new AnswerResource($answers);
     }

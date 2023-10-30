@@ -30,6 +30,8 @@ import {actionTypes as authGetterTypes, getterTypes} from "./store/modules/auth"
 import Vuelidate from 'vuelidate'
 
 
+
+
 window.Vue = require('vue').default;
 
 Vue.use(VueRouter);

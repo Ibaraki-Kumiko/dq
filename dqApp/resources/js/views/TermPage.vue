@@ -1,40 +1,44 @@
 <template>
     <div>
-        <div>
+        <EllipsisLoader :color="'#54f1d2'" :loading="isLoading"></EllipsisLoader>
+        <div v-show="!isLoading">
             <Breadcrumbs/>
-        </div>
-        <div class="term">
-            <h1 class="term__title">{{ this.term }}</h1>
-        </div>
-        <p>{{ this.type }}</p>
-        <!--        <p>Lautschrift </p>-->
-        <div>
-            <h2>Значения</h2>
-            <p>{{ this.definition }}</p>
-            <dl class="note">
-                <dt class="note__title">Примеры</dt>
-                <dd>
-                    <ul class="note__list">
-                        <li>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam</li>
-                    </ul>
-                </dd>
-            </dl>
 
+            <div class="term">
+                <h1 class="term__title">{{ this.term }}</h1>
+            </div>
+            <p>{{ this.type }}</p>
+            <!--        <p>Lautschrift </p>-->
+            <div>
+                <h2>Значения</h2>
+                <p>{{ this.definition }}</p>
+                <dl class="note">
+                    <dt class="note__title">Примеры</dt>
+                    <dd>
+                        <ul class="note__list">
+                            <li>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam</li>
+                        </ul>
+                    </dd>
+                </dl>
+
+            </div>
         </div>
     </div>
 </template>
 
 <script>
 import Breadcrumbs from '../components/shared/Breadcrumbs';
+import EllipsisLoader from "../components/shared/EllipsisLoader";
 
 export default {
     name: "TermPage",
     components: {
         Breadcrumbs,
+        EllipsisLoader
     },
     data() {
         return {
-            loading: false,
+            isLoading: false,
             term: '',
             translation: '',
             definition: '',
@@ -45,7 +49,7 @@ export default {
     props: {},
     created() {
         const slug = this.$route.params.slug
-        this.loading = true;
+        this.isLoading = true;
         axios
             .get(`/dictionary/${slug}`)
             .then(response => {
@@ -54,7 +58,7 @@ export default {
                 this.type = response.data.data.type
                 this.definition = response.data.data.definition
             })
-            .then(() => (this.loading = false));
+            .then(() => (this.isLoading = false));
     },
 
 

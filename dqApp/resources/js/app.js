@@ -6,6 +6,11 @@
 
 require('./bootstrap');
 
+import { BootstrapVue} from 'bootstrap-vue'
+import 'bootstrap/dist/css/bootstrap.css'
+import 'bootstrap-vue/dist/bootstrap-vue.css'
+
+
 import VueRouter from "vue-router";
 import VueCookie from "vue-cookie"
 
@@ -40,6 +45,9 @@ Vue.use(Vuelidate)
 Vue.use(PrimeVue)
 Vue.use(ToastService);
 Vue.use(InstantSearch);
+
+Vue.use(BootstrapVue)
+
 
 
 

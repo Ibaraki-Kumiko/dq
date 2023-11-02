@@ -1,9 +1,9 @@
 <template>
-    <nav class="nav top-nav mb-5 border-bottom">
+    <nav class="nav top-nav mb-5 border-bottom d-flex">
 
-            <router-link class="navbar-brand-link" to="/">
-                <div class="navbar-brand">Deutsche Quelle</div>
-            </router-link>
+        <router-link class="navbar-brand-link" to="/">
+            <div class="navbar-brand">Deutsche Quelle</div>
+        </router-link>
 
         <ul class="nav">
             <li class="nav-item">
@@ -11,24 +11,24 @@
                     Главная
                 </router-link>
             </li>
-            <!-- <li class="nav-item">
-                 <router-link class="nav-link" :to="{name: 'feed'}" exact active-class="active">Feed</router-link>
-             </li>
- -->
-            <template v-if="isLoggedIn">
-                <li class="nav-item">
+        </ul>
+        <template v-if="isLoggedIn">
+            <ul class="nav">
+<!--                <li class="nav-item">
                     <router-link class="nav-link" :to="{name: 'favorites'}" exact active-class="active">Избранное
                     </router-link>
-                </li>
+                </li>-->
                 <li class="nav-item">
                     <router-link class="nav-link" :to="{name: 'modules'}" exact active-class="active">Грамматика
                     </router-link>
                 </li>
                 <li class="nav-item">
-                    <router-link class="nav-link" :to="{name: 'search'}" exact active-class="active">Словарь
+                    <router-link class="nav-link" :to="{name: 'dictionary'}" exact active-class="active">Словарь
                     </router-link>
                 </li>
+            </ul>
 
+            <ul class="nav margin-left">
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button"
                        data-bs-toggle="dropdown" aria-expanded="false">
@@ -59,19 +59,13 @@
                         <li><a class="dropdown-item" href="#" @click.prevent="onClick">Выйти</a></li>
                     </ul>
                 </li>
+            </ul>
 
 
-            </template>
+        </template>
 
-            <template v-if="isAnonymous">
-                <li class="nav-item">
-                    <router-link class="nav-link" :to="{name: 'modules'}" exact active-class="active">Грамматика
-                    </router-link>
-                </li>
-                <li class="nav-item">
-                    <router-link class="nav-link" :to="{name: 'dictionary'}" exact active-class="active">Словарь
-                    </router-link>
-                </li>
+        <template v-if="isAnonymous">
+            <ul class="nav margin-left">
                 <li class="nav-item">
                     <router-link class="nav-link" :to="{name: 'login'}" active-class="active"> Sign in</router-link>
                 </li>
@@ -79,10 +73,8 @@
                 <li class="nav-item">
                     <router-link class="nav-link" :to="{name: 'register'}" active-class="active"> Sign up</router-link>
                 </li>
-            </template>
-
-        </ul>
-
+            </ul>
+        </template>
     </nav>
 </template>
 
@@ -121,9 +113,7 @@ export default {
         },
 
     },
-    watch: {
-
-    },
+    watch: {},
     mounted() {
 
 
@@ -133,6 +123,11 @@ export default {
 
 <style lang="scss" scoped>
 @import "resources/sass/app.scss";
+
+.margin-left {
+    margin-left: auto;
+}
+
 .prev-pic {
     border-radius: 50%;
     width: 50px;
@@ -145,6 +140,7 @@ export default {
     font-size: 1rem;
     vertical-align: middle;
 }
+
 .navbar-brand-link {
     text-decoration: none;
 }

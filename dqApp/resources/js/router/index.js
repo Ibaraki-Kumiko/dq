@@ -16,6 +16,7 @@ import Modules from "../views/ModulesPage";
 import UnitsPage from "../views/UnitsPage";
 import ExercisesPage from "../views/ExercisesPage";
 import TheoryPage from "../views/TheoryPage";
+import AboutUsPage from "../views/AboutUsPage";
 
 
 
@@ -95,8 +96,9 @@ const routes = [
     },
 
     {
-        path: '/testTheory',
-        component: TheoryPage
+        path: '/about',
+        name: 'about',
+        component: AboutUsPage
     },
 
     {

@@ -5,7 +5,9 @@
                 <router-link class="nav-link px-2 text-muted" :to="{name: 'home'}" exact active-class="active">
                     Главная
                 </router-link></li>
-            <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">О нас</a></li>
+            <li class="nav-item">
+                <router-link class="nav-link px-2 text-muted" :to="{name: 'about'}" exact active-class="active">
+                   О нас</router-link></li>
             <li class="nav-item">
                 <router-link class="nav-link px-2 text-muted" :to="{name: 'contacts'}" exact active-class="active">
                 Контакты

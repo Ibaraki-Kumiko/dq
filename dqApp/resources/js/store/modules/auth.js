@@ -155,7 +155,6 @@ const actions = {
 
                     resolve(response.data.user)
                 }).catch(() => {
-                console.log('ERROR CurrentUser!! ')
                 context.commit(mutationTypes.getCurrentUserFailure)
                 resolve()
             })

@@ -7,11 +7,13 @@
             <div class="term">
                 <h1 class="term__title">{{ this.term }}</h1>
             </div>
-            <p>{{ this.type }}</p>
+<!--            <p>{{ this.type }}</p>-->
             <!--        <p>Lautschrift </p>-->
             <div>
                 <h2>Значения</h2>
-                <p>{{ this.definition }}</p>
+                <div
+                     v-html="this.definition">
+                </div>
                 <dl class="note">
                     <dt class="note__title">Примеры</dt>
                     <dd>

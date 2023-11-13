@@ -25,8 +25,6 @@ export default {
     },
     mounted() {
         this.generateCrumbs(this.$route);
-        console.log("$router", this.$router.options.routes);
-        console.warn("$route", this.$route);
     },
     methods: {
         replaceHyphensWithSpaces(inputString) {
@@ -34,7 +32,6 @@ export default {
         },
         generateCrumbs(route) {
             const segments = route.path.split('/').filter(segment => segment);
-            console.log(segments)
             this.crumbs = segments.map((segment, index) => {
                 return {
                     text: this.replaceHyphensWithSpaces(segment),

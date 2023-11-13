@@ -1,53 +1,40 @@
 <template>
     <div>
         <div>
-            <Breadcrumbs/>
+            <Message v-for="msg of messages" :severity="msg.severity" :key="msg.content">{{ msg.content }}</Message>
+
         </div>
         <ais-instant-search
             :search-client="searchClient"
             index-name="terms"
             class="container"
-            :search-function="searchFunction"
+            :initial-ui-state="initialUiState"
         >
+
+
             <div class="row">
                 <ais-configure
                     :hits-per-page.camel="10"
                     :enable-rules.camel="false">
-
-                    <template v-slot="{ searchParameters, refine }" @loadstart
-                        ="refine({
-        ...searchParameters,
-        enableRules: !searchParameters.enableRules,
-      })">
-
-                    </template>
                 </ais-configure>
-
-
 
                 <div class="search-block col-md-12 col-sm-12">
                     <ais-search-box
-                        placeholder=""
+                        placeholder="Beginnen Sie zu tippen"
                         :autofocus="true"
-                        show-loading-indicator
-                        reset-title="Remove the query"
                     >
-
-
                     </ais-search-box>
 
-                    <ais-state-results >
+
+                    <ais-state-results>
                         <template v-slot="{ results: { hits, query } }">
-
                             <table class="table" v-if="query.length > 0 ">
-
-                                <thead >
+                                <thead>
                                 <tr>
                                     <th scope="col">
                                         <h1>
-                                            Результаты для <b>{{query}}</b>
+                                            Результаты для <b>{{ query }}</b>
                                         </h1>
-
                                     </th>
                                 </tr>
                                 </thead>
@@ -57,7 +44,7 @@
                                             <td @click="sendEvent(items)">
                                                 <div class="vignette__label">
                                                     <router-link class="phrase_link"
-                                                                 :to="'/dictionary/' + item.term"
+                                                                 :to="'/dictionary/' + item.slug"
 
 
                                                     >
@@ -74,7 +61,7 @@
                                         </tr>
                                     </template>
                                 </ais-hits>
-                                <tr  v-else class="no-results">
+                                <tr v-else class="no-results">
                                     <td>Ничего не найдено по запросу: {{ query }}.</td>
                                 </tr>
                             </table>
@@ -83,18 +70,87 @@
                         </template>
                     </ais-state-results>
 
+
                     <ais-pagination
                         class="pagination"
-                        :show-first="true"
+                        :show-first="false"
                         :show-previous="true"
                         :show-next="true"
                         :show-last="true"
                         :padding="2"
+
+                        :total-pages="5"
                         :class-names="{
                          'ais-Pagination': 'MyCustomPagination',
-                         'ais-Pagination-link': 'MyCustomLinkPagination'
-                    }"
-                    />
+                         'ais-Pagination-link': 'MyCustomLinkPagination'}"
+                    >
+                        <template
+                            v-slot="{
+                              currentRefinement,
+                              nbPages,
+                              nbHits,
+                              pages,
+                              isFirstPage,
+                              isLastPage,
+                              refine,
+                              createURL,
+
+                            }"
+                        >
+
+
+                            <ul class="ais-Pagination-list" v-show="showPagination">
+
+                                <li v-if="!isFirstPage" class="ais-Pagination-item ">
+                                    <a :href="createURL(0)" @click.prevent="refine(0)"
+                                       class="ais-Pagination-link">
+                                        ‹‹
+                                    </a>
+                                </li>
+                                <li v-if="!isFirstPage" class="ais-Pagination-item ">
+                                    <a
+                                        :href="createURL(currentRefinement - 1)"
+                                        @click.prevent="refine(currentRefinement - 1)"
+                                        class="ais-Pagination-link"
+                                    >
+                                        ‹
+                                    </a>
+                                </li>
+                                <li v-for="page in pages" :key="page"
+                                    class="ais-Pagination-item ais-Pagination-item--page">
+                                    <a
+                                        :href="createURL(page)"
+                                        :style="{ fontWeight: page === currentRefinement ? 'bold' : '' }"
+                                        @click.prevent="refine(page)"
+                                        class="ais-Pagination-link"
+                                    >
+                                        {{ page + 1 }}
+                                    </a>
+                                </li>
+                                <li v-if="!isLastPage" class="ais-Pagination-item ">
+                                    <a
+                                        :href="createURL(currentRefinement + 1)"
+                                        @click.prevent="refine(currentRefinement + 1)"
+                                        class="ais-Pagination-link"
+                                    >
+                                        ›
+                                    </a>
+                                </li>
+                                <li v-if="!isLastPage" class="ais-Pagination-item ">
+                                    <a :href="createURL(nbPages)" @click.prevent="refine(nbPages)"
+                                       class="ais-Pagination-link">
+                                        ››
+                                    </a>
+                                </li>
+                            </ul>
+                        </template>
+                    </ais-pagination>
+                    <ais-stats>
+                        <template v-slot="{ nbHits, page, nbPages, query }">
+                             {{getResultText(nbHits, page, nbPages, query)}}
+                        </template>
+                    </ais-stats>
+
 
                 </div>
 
@@ -107,6 +163,8 @@
 </template>
 
 <script>
+import Message from 'primevue/message';
+
 import Breadcrumbs from '../components/shared/Breadcrumbs';
 import algoliasearch from 'algoliasearch/lite';
 
@@ -125,10 +183,12 @@ import {
     AisHits
 } from 'vue-instantsearch';
 
+
 export default {
     name: "SearchForm",
     components: {
         Breadcrumbs,
+        Message,
 
         AisInstantSearch,
         AisSearchBox,
@@ -144,40 +204,41 @@ export default {
     },
     data() {
         return {
+            showPagination: false,
             showResults: false,
             searchClient: algoliasearch(
                 process.env.MIX_ALGOLIA_APP_ID,
                 process.env.MIX_ALGOLIA_API_KEY
             ),
 
-            searchFunction(helper) {
-                if (helper.state.query) {
-                    helper.search();
-                }
-                if (helper.state.query=== '') {
-                    helper.search();
+            searchFunction({uiState, setUiState}) {
 
-                }
-
-
-               helper.search()
 
             },
-            defaultFac:
-                {
-                    "count": 4,
-                    "isRefined": false,
-                    "value": "vulgar",
-                    "label": "vulgar",
-                    "highlighted": "vulgar"
-                }
+            initialUiState: {
+                terms: {
+                    query: 'ab',
+                    page: 1,
+                },
+            },
+
+
+            messages: [
+                {severity: 'info', content: 'This is a demo version that contains only 300 words starting with "A"'},
+
+            ]
 
         };
 
     },
+    mounted() {
+
+    },
     methods: {
-        sendEvent(item) {
-        },
+        getResultText(nbHits, page, nbPages, query) {
+            this.showPagination = query !== "";
+
+        }
 
     }
 
@@ -189,7 +250,7 @@ export default {
 
 .vignette__label {
     font-weight: 400;
-    font-family: Px,cv-linear,l,monospace;
+    font-family: Px, cv-linear, l, monospace;
     background: #04cba0;
     text-decoration: none;
     font-size: 22px;
@@ -261,6 +322,7 @@ export default {
     cursor: default;
     color: grey;
 }
+
 .ais-SearchBox {
 
     align-items: center;
@@ -270,6 +332,7 @@ export default {
     background-color: #04c89d;
     height: 100px;
 }
+
 .ais-SearchBox-form {
     margin: 0 17px 0 17px;
     border-radius: 3px;
@@ -280,6 +343,7 @@ export default {
     border-color: #299c83;
 
 }
+
 .ais-SearchBox-input {
     font-size: 30px;
     font-weight: bold;

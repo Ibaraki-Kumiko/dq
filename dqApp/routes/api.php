@@ -51,6 +51,8 @@ Route::post('/dictionary/',  [\App\Http\Controllers\DictionaryController::class,
 Route::get('/exercise/{id}', [\App\Http\Controllers\ExerciseController::class, 'show']);
 //Route::get('/exercises/{unit_id}', [\App\Http\Controllers\ExerciseController::class, 'index']);
 Route::get('/exercises/{slug}', [\App\Http\Controllers\ExerciseController::class, 'index']);
+Route::get('/exercises', \App\Http\Controllers\ExerciseIndexController::class);
+
 
 //OPTIONS
 Route::get('/options/{id}', [\App\Http\Controllers\OptionController::class, 'show']);

@@ -17,6 +17,7 @@ import UnitsPage from "../views/UnitsPage";
 import ExercisesPage from "../views/ExercisesPage";
 import TheoryPage from "../views/TheoryPage";
 import AboutUsPage from "../views/AboutUsPage";
+import AllExercisesPage from "../views/AllExercisesPage";
 
 
 
@@ -93,6 +94,12 @@ const routes = [
         path: '/modules/:module_slug/:unit_slug/exercises/:exercise_id',
         name: 'common',
         component: Exercise
+    },
+
+    {
+        path: '/exercises',
+        name: 'allExercises',
+        component: AllExercisesPage
     },
 
     {

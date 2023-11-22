@@ -34,6 +34,9 @@ import {actionTypes as authGetterTypes, getterTypes} from "./store/modules/auth"
 //Vuelidate
 import Vuelidate from 'vuelidate'
 
+//VueI18n
+import VueI18n from 'vue-i18n'
+import messages from "./VueI18n/messages";
 
 
 
@@ -48,7 +51,14 @@ Vue.use(InstantSearch);
 
 Vue.use(BootstrapVue)
 
+Vue.use(VueI18n)
 
+const i18n = new VueI18n({
+
+    //locale: 'de', // установка локализации по умолчанию
+    locale: store.state.language, // установка локализации по умолчанию
+    messages // установка сообщений локализаций
+})
 
 
 /**
@@ -78,7 +88,8 @@ const app = new Vue({
     components: {
         index
     },
-    store
+    store,
+    i18n
 });
 global.vm = app;
 

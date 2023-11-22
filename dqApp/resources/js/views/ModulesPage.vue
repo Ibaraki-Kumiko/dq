@@ -59,11 +59,26 @@ export default {
                 const middleIndex = Math.ceil(this.modules.length / 2);
                 this.firstList = this.modules.slice(0, middleIndex);
                 this.secondList = this.modules.slice(middleIndex);
-                console.log(this.firstList)
+
         })
             .then(() => {
                 this.$store.commit('setLoading', false);
                 this.loading = false
+            })
+            .catch(error => {
+                // Обработка ошибок
+                if (error.response) {
+                    // Сервер вернул статус, не являющийся 2xx
+                    console.log('Ошибка:', error.response.status);
+                    console.log('Данные ошибки:', error.response.data);
+                } else if (error.request) {
+                    // Запрос был сделан, но сервер не вернул ответ
+                    console.log('Нет ответа от сервера:', error.request);
+                } else {
+                    // Что-то случилось при настройке запроса
+                    console.log('Ошибка:', error.message);
+                }
+                console.log('Ошибка конфигурации:', error.config);
             });
     },
 

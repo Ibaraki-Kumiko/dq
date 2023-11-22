@@ -21,12 +21,8 @@ export default {
             units: []
         }
     },
-    props: {
-
-    },
-    components: {
-
-    },
+    props: {},
+    components: {},
 
     created() {
         const moduleId = this.$route.params.id
@@ -39,12 +35,27 @@ export default {
                 this.translation = response.data.data.translation
                 this.units = response.data.data.units
             })
-            .then(() =>
-            {
+            .catch(error => {
+                console.log("Зашел в блок catch")
+            if (error.response) {
+
+                console.log('Ошибка:', error.response.status);
+                console.log('Данные ошибки:', error.response.data);
+            } else if (error.request) {
+
+                console.log('Нет ответа от сервера:', error.request);
+            } else {
+                // Что-то случилось при настройке запроса
+                console.log('Ошибка:', error.message);
+            }
+            console.log('Ошибка конфигурации:', error.config)
+
+        })
+            .then(() => {
                 this.$store.commit('setLoading', false);
                 (this.loading = false)
             }
-                );
+        )
     },
 }
 </script>

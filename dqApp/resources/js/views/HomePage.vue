@@ -3,8 +3,10 @@
         <div class="content-wrapper">
         <div class="centered-text">
             <h1 class="title"><b>Coming Soon</b></h1>
-            <p class="desc">Our website is currently undergoing scheduled maintenance.
-                We Should be back shortly. Thank you for your patience.</p>
+<!--            <p class="desc">Our website is currently undergoing scheduled maintenance.
+                We Should be back shortly. Thank you for your patience.</p>-->
+            <p class="desc">Сайт в разработке. В скором времени мы вернемся! </p>
+            <p class="desc">Diese Website befindet sich gerade im Aufbau. Wir sind bald zurück! </p>
         </div>
         </div>
     </section>
@@ -18,9 +20,12 @@ export default {
 
 <style scoped>
 .centered-text {
-    padding-top: 20%;
+    display: flex;
+    align-items: center; /* центрируем элементы по вертикали */
+    justify-content: center; /* центрируем элементы по горизонтали */
+    flex-direction: column;
     height: 60vh;
-    text-align: center;
+   /* text-align: center;*/
 }
 
 .title {

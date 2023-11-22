@@ -3,11 +3,11 @@
         <div class="container page">
             <div class="row">
                 <div class="col-md-6 offset-md-3 col-xs-12">
-                    <h1 class="text-xs-center">Sign up</h1>
+                    <h1 class="text-xs-center">{{ $t("RegisterPage.signUp") }}</h1>
                     <p class="text-xs-center">
-                        Уже есть аккаунт?
+                        {{ $t("RegisterPage.doYouHaveAnAccount") }}
                         <router-link :to="{name: 'login'}">
-                            Войти
+                            {{ $t("RegisterPage.signIn") }}
                         </router-link>
                     </p>
 
@@ -27,11 +27,11 @@
 
 
                             </div>
-                            <div class="invalid-feedback" v-if="$v.username.$dirty && !$v.username.required">Поле
-                                обязательно для заполнения
+                            <div class="invalid-feedback" v-if="$v.username.$dirty && !$v.username.required">
+                                {{ $t("errorsMessages.fieldIsRequired") }}
                             </div>
                             <div class="invalid-feedback" v-if="$v.username.$dirty &&  !$v.username.minLength">
-                                Минимальная длина не менее 2 символов
+                                {{ $t("errorsMessages.minimalLength") }}
                             </div>
                         </fieldset>
                         <fieldset class="form-group mt-3">
@@ -45,13 +45,13 @@
                                 :class="[{'is-invalid': hasErrorFor('email') || ($v.email.$dirty && (!$v.email.required) || !$v.email.email)}]"
                             />
                             <div class="invalid-feedback" v-if="hasErrorFor('email')">
-                                Email имеет некорректный формат
+                                {{ $t("errorsMessages.EnterAValidEmail") }}
                             </div>
-                            <div class="invalid-feedback" v-if="$v.email.$dirty && !$v.email.required">Поле обязательно
-                                для заполнения
+                            <div class="invalid-feedback" v-if="$v.email.$dirty && !$v.email.required">
+                                {{ $t("errorsMessages.fieldIsRequired") }}
                             </div>
-                            <div class="invalid-feedback" v-if="$v.email.$dirty && !$v.email.email">Введите валидный
-                                email
+                            <div class="invalid-feedback" v-if="$v.email.$dirty && !$v.email.email">
+                                {{ $t("errorsMessages.EnterAValidEmail") }}
                             </div>
                         </fieldset>
                         <fieldset class="form-group mt-3">
@@ -64,19 +64,20 @@
                                 :class="[{'is-invalid': hasErrorFor('password') || ($v.password.$dirty && (!$v.password.required || !$v.password.minLength))}]"
                             />
                             <div class="invalid-feedback" v-if="hasErrorFor('password')">
-                                Пароль должен быть не менее 8 символов
+                                {{ $t("errorsMessages.PasswordMinLength") }}
                             </div>
-                            <div class="invalid-feedback" v-if="$v.password.$dirty && !$v.password.required">Поле
-                                обязательно для заполнения
+                            <div class="invalid-feedback" v-if="$v.password.$dirty && !$v.password.required">
+                                {{ $t("errorsMessages.fieldIsRequired") }}
                             </div>
                             <div class="invalid-feedback" v-if="$v.password.$dirty && !$v.password.minLength">
-                                Минимальная длина пароля {{ this.$v.password.$params.minLength.min }} символов
+                                {{ $t('errorsMessages.MinLength', { msg: this.$v.password.$params.minLength.min  }) }}
+
                             </div>
 
                         </fieldset>
                         <button class="btn btn-lg btn-outline-primary pull-xs-right mt-3"
                                 :disabled="isSubmitting || $v.$invalid">
-                            Sign Up
+                            {{ $t("RegisterPage.signUp") }}
                         </button>
                     </form>
 
@@ -138,14 +139,12 @@ export default {
                 name: this.username,
                 password: this.password
             }).then(user => {
-                console.log('successfully register user', user)
                 this.$router.push({name: 'home'})
 
             })
         },
         hasErrorFor(field) {
             if (this.$store.state.auth.validationErrors && this.$store.state.auth.validationErrors.hasOwnProperty(field)) {
-                console.log(this.$store.state.auth.validationErrors[field])
                 return true
             } else {
                 return null

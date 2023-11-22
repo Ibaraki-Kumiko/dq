@@ -11,18 +11,25 @@ Vue.use(Vuex, VueCookies, VueCookie)
 
 export default new Vuex.Store({
     state: {
-        loading: false
+        loading: false,
+        language: 'de'
     },
     mutations: {
         setLoading(state, payload) {
             state.loading = payload;
+        },
+        setLanguage(state, language) {
+            state.language = language;
         }
 
     },
     getters: {
-
+        currentLanguage: state => state.language
     },
     actions: {
+        changeLanguage({ commit }, language) {
+            commit('setLanguage', language);
+        }
     },
     modules: {
         auth,

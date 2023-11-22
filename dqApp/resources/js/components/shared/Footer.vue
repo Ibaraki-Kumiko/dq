@@ -3,14 +3,14 @@
         <ul class="nav justify-content-center border-bottom pb-3 mb-3">
             <li class="nav-item">
                 <router-link class="nav-link px-2 text-muted" :to="{name: 'home'}" exact active-class="active">
-                    Главная
+                    <p>{{ $t("Footer.home") }}</p>
                 </router-link></li>
             <li class="nav-item">
                 <router-link class="nav-link px-2 text-muted" :to="{name: 'about'}" exact active-class="active">
-                   О нас</router-link></li>
+                    {{ $t("Footer.about") }}</router-link></li>
             <li class="nav-item">
                 <router-link class="nav-link px-2 text-muted" :to="{name: 'contacts'}" exact active-class="active">
-                Контакты
+                    {{ $t("Footer.contacts") }}
             </router-link></li>
 
         </ul>

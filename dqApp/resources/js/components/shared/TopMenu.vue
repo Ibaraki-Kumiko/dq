@@ -8,7 +8,7 @@
         <ul class="nav">
             <li class="nav-item">
                 <router-link class="nav-link" :to="{name: 'home'}" exact active-class="active">
-                    Главная
+                    {{ $t("TopMenu.home") }}
                 </router-link>
             </li>
         </ul>
@@ -19,11 +19,11 @@
                     </router-link>
                 </li>-->
                 <li class="nav-item">
-                    <router-link class="nav-link" :to="{name: 'modules'}" exact active-class="active">Грамматика
+                    <router-link class="nav-link" :to="{name: 'modules'}" exact active-class="active">{{ $t("TopMenu.grammar") }}
                     </router-link>
                 </li>
                 <li class="nav-item">
-                    <router-link class="nav-link" :to="{name: 'dictionary'}" exact active-class="active">Словарь
+                    <router-link class="nav-link" :to="{name: 'dictionary'}" exact active-class="active">{{ $t("TopMenu.dictionary") }}
                     </router-link>
                 </li>
             </ul>
@@ -51,13 +51,16 @@
                             <router-link class="nav-link"
                                          :to="{name: 'updateProfile', params: {nickname: currentUser.nickname}}"
                                          active-class="active">
-                                Настройки
+                                {{ $t("TopMenu.settings") }}
                             </router-link>
                             <hr class="menu-divider">
                         </li>
 
-                        <li><a class="dropdown-item" href="#" @click.prevent="onClick">Выйти</a></li>
+                        <li><a class="dropdown-item" href="#" @click.prevent="onClick">{{ $t("TopMenu.logout") }}</a></li>
                     </ul>
+                </li>
+                <li>
+                    <switch-language></switch-language>
                 </li>
             </ul>
 
@@ -67,14 +70,18 @@
         <template v-if="isAnonymous">
             <ul class="nav margin-left">
                 <li class="nav-item">
-                    <router-link class="nav-link" :to="{name: 'login'}" active-class="active"> Sign in</router-link>
+                    <router-link class="nav-link" :to="{name: 'login'}" active-class="active">{{ $t("TopMenu.signIn") }}</router-link>
                 </li>
 
                 <li class="nav-item">
-                    <router-link class="nav-link" :to="{name: 'register'}" active-class="active"> Sign up</router-link>
+                    <router-link class="nav-link" :to="{name: 'register'}" active-class="active">{{ $t("TopMenu.signUp") }}</router-link>
+                </li>
+                <li class="nav-item">
+                    <switch-language></switch-language>
                 </li>
             </ul>
         </template>
+
     </nav>
 </template>
 
@@ -85,6 +92,7 @@ import {
     RiAccountCircleLine
 
 } from "vue-remix-icons";
+import SwitchLanguage from "./SwitchLanguage";
 
 
 export default {
@@ -103,7 +111,8 @@ export default {
 
     },
     components: {
-        RiAccountCircleLine
+        RiAccountCircleLine,
+        SwitchLanguage
     },
     methods: {
         onClick() {
@@ -124,6 +133,10 @@ export default {
 <style lang="scss" scoped>
 @import "resources/sass/app.scss";
 
+.nav-item {
+    margin: 5px 0;
+}
+
 .margin-left {
     margin-left: auto;
 }
@@ -143,6 +156,7 @@ export default {
 
 .navbar-brand-link {
     text-decoration: none;
+    margin: 5px 0;
 }
 
 .nav-link {

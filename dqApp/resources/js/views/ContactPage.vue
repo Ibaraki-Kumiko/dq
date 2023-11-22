@@ -1,17 +1,15 @@
 <template>
     <div class="container">
         <!-- <ValidationErrors   v-if="validationErrors" :validation-errors="validationErrors"></ValidationErrors>&ndash;&gt;-->
-        <!--<div  v-if="hasErrorFor('email')">
-            Эти учетные данные не соответствуют нашим записям
-        </div>-->
+
         <Message severity="error" v-if="errorMessage" :closable="false">{{ errorMessage }}</Message>
         <form @submit.prevent="onSubmit" class="contact100-form validate-form">
             <span class="contact100-form-title">
-            Contact Us
+                  {{ $t("ContactPage.contactUs") }}
             </span>
             <div class="wrap-input100 rs1-wrap-input100">
 
-                <span class="label-input100">Ваше имя</span>
+                <span class="label-input100">  {{ $t("ContactPage.name") }}</span>
 
                 <input
                     class="input100"
@@ -25,10 +23,11 @@
 
 
                 <span class="focus-input100"></span>
-                <div class="invalid">{{ $v.name.$error ? 'Поле обязательно для заполнения' : '' }}</div>
+<!--                <div class="invalid">{{ $v.name.$error ? 'Поле обязательно для заполнения' : '' }}</div>-->
+                <div class="invalid">{{ $v.name.$error ?     $t("errorsMessages.fieldIsRequired")  : '' }}</div>
             </div>
             <div class="wrap-input100 rs1-wrap-input100 validate-input">
-                <span class="label-input100">Email</span>
+                <span class="label-input100"> {{ $t("ContactPage.email") }}</span>
                 <input
                     class="input100"
                     type="text"
@@ -40,13 +39,14 @@
                 <!--  :placeholder="($v.email.$dirty && (!$v.email.required) || !$v.email.email) ? '' : 'Введите e-mail'"-->
                 <span class="focus-input100"></span>
                 <div class="invalid">{{
-                        $v.email.$dirty && !$v.email.required ? 'Поле обязательно для заполнения' : $v.email.$dirty && !$v.email.email ? 'Введите валидный email' : ''
+                       /* $v.email.$dirty && !$v.email.required ? 'Поле обязательно для заполнения' : $v.email.$dirty && !$v.email.email ? 'Введите валидный email' : ''*/
+                        $v.email.$dirty && !$v.email.required ?  $t("errorsMessages.fieldIsRequired") : $v.email.$dirty && !$v.email.email ?  $t("errorsMessages.EnterAValidEmail") : ''
                     }}
                 </div>
                 <!--                <div class="invalid" v-if="$v.email.$dirty && !$v.email.email">Введите валидный email</div>-->
             </div>
             <div class="wrap-input100 validate-input rs1-wrap-textarea100">
-                <span class="label-input100">Сообщение</span>
+                <span class="label-input100">{{ $t("ContactPage.message") }}</span>
                 <textarea
                     class="input100"
                     name="message"
@@ -60,12 +60,12 @@
 
                 <span class="focus-input100"></span>
                 <!--    <div class="invalid" v-if="$v.message.$dirty && !$v.message.required">Поле обязательно для заполнения</div>-->
-                <div class="invalid">{{ $v.message.$error ? 'Поле обязательно для заполнения' : '' }}</div>
+                <div class="invalid">{{ $v.message.$error ? $t("errorsMessages.fieldIsRequired")  : '' }}</div>
             </div>
 
             <div class="container-contact100-form-btn">
                 <button class="button" :disabled="isSubmitting || $v.$invalid">
-                <span>Submit
+                <span>{{ $t("ContactPage.submit") }}
                 </span>
                 </button>
             </div>

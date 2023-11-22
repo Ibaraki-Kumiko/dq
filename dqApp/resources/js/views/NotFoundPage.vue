@@ -35,7 +35,7 @@
 export default {
     name: "NotFound",
     mounted() {
-
+        this.$store.commit('setLoading', false);
     }
 }
 </script>

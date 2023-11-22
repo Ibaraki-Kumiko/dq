@@ -110,15 +110,21 @@ const routes = [
 
     {
         path: "/:notFound",
+        name: 'not-found',
         component: NotFound,
     },
 
 
 ]
 
+
+
 const router = new VueRouter({
     routes,
     mode: 'history'
 });
+
+
+
 
 export default router;

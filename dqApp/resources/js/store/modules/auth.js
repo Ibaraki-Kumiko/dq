@@ -142,6 +142,7 @@ const actions = {
                     Vue.cookie.set('token', response.data.token, 1);
                     resolve(response.data.user)
                 }).catch(result => {
+                console.log("login failure", result.response.data)
                 context.commit(mutationTypes.loginFailure, result.response.data.errors)
             })
         })

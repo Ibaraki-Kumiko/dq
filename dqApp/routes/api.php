@@ -61,3 +61,6 @@ Route::get('/options/{id}', [\App\Http\Controllers\OptionController::class, 'sho
 //Answers
 Route::post('/check/{id}', [\App\Http\Controllers\AnswerController::class, 'check']);
 Route::get('/answers/{id}', [\App\Http\Controllers\AnswerController::class, 'show']);
+
+//ChatGPT test
+/*Route::get('/chat', [\App\Http\Controllers\ChatController::class, 'send']);*/

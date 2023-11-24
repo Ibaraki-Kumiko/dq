@@ -32,9 +32,11 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button"
                        data-bs-toggle="dropdown" aria-expanded="false">
-                        <RiAccountCircleLine></RiAccountCircleLine>
+                        <i class="pi pi-user"></i>
+<!--                        <RiAccountBoxLine></RiAccountBoxLine>-->
+<!--                        <RiAccountCircleLine></RiAccountCircleLine>-->
                     </a>
-                    <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+                    <ul class="dropdown-menu" aria-labelledby="navbarDarkDropdownMenuLink">
                         <li>
                             <router-link class="nav-link"
                                          :to="{name: 'profile', params: {nickname: currentUser.nickname}}"
@@ -59,12 +61,10 @@
                         <li><a class="dropdown-item" href="#" @click.prevent="onClick">{{ $t("TopMenu.logout") }}</a></li>
                     </ul>
                 </li>
-                <li>
+                <li class="nav-item">
                     <switch-language></switch-language>
                 </li>
             </ul>
-
-
         </template>
 
         <template v-if="isAnonymous">
@@ -89,7 +89,8 @@
 import {actionTypes, getterTypes} from "../../store/modules/auth";
 import {mapGetters, mapState} from "vuex";
 import {
-    RiAccountCircleLine
+    RiAccountCircleLine,
+    RiAccountBoxLine
 
 } from "vue-remix-icons";
 import SwitchLanguage from "./SwitchLanguage";
@@ -112,6 +113,7 @@ export default {
     },
     components: {
         RiAccountCircleLine,
+        RiAccountBoxLine,
         SwitchLanguage
     },
     methods: {

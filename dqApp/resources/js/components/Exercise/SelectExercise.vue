@@ -9,12 +9,10 @@
                     v-for="(question, index) in questions"
                     :key="question.id"
                 >
-                    <!--                <Question
-                                        :question="question"
-                                    />-->
+
                     <div>{{ index + 1 }}.
                         <span :ref="`question${question.id}`" :id="question.id" v-html="question.question"></span>
-                        <!--:class="spanClasses(question.id)"-->
+
                         <div>{{ question.translation }}</div>
                     </div>
 
@@ -39,10 +37,7 @@ import Question from "./Question";
 
 export default {
     name: "Exercise",
- /*   props: {
-        bookableId: [String, Number]
 
-    },*/
     props: ['exercise'],
     components: {
         Question,
@@ -63,14 +58,11 @@ export default {
         }
     },
     created() {
-        console.log('select exercise', this.exercise.options)
-       // this.loading = true;
-
         this.options = this.exercise.options
-     //   this.options = JSON.parse(this.exercise.options[0].options)
+
         this.questions = this.exercise.questions
         this.description = this.exercise.name
-        console.log('kjkk', this.exercise)
+
         /*axios
             .get(`/exercises/1`)
             .then(response => {

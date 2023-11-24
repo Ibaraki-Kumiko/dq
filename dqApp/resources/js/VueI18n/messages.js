@@ -1,9 +1,5 @@
-export default  {
+export default {
     de: {
-        message: {
-            hello: '{msg} world',
-
-        },
         TopMenu: {
             home: 'Home',
             grammar: "Grammatik",
@@ -37,24 +33,26 @@ export default  {
         },
         LoginPage: {
             signIn: "Anmelden",
-           // dontHaveAnAccount: "Haben Sie kein Konto?",
+            // dontHaveAnAccount: "Haben Sie kein Konto?",
             dontHaveAnAccount: "Neu bei uns?",
             //Du hast noch keinen Benutzerzugang?
             createANeAccount: "Konto erstellen",
             forgotPassword: "Haben Sie Ihr Passwort vergessen?"
         },
-        ContactPage:    {
+        ContactPage: {
             contactUs: "Kontakt",
             name: "Vorname",
             email: "E-Mail-Adresse",
             message: "Nachricht",
             submit: "Absenden"
         },
+        ExercisePage: {
+            resetButton: "Reset",
+            showAnswersButton: "Lösen",
+            checkAnswersButton: "Überprüfen"
+        }
     },
     ru: {
-        message: {
-            hello: '{msg} мир'
-        },
         TopMenu: {
             home: 'Главная',
             grammar: "Грамматика",
@@ -92,13 +90,18 @@ export default  {
             createANeAccount: "Создать новый аккаунт",
             forgotPassword: "Забыли пароль?"
         },
-        ContactPage:    {
+        ContactPage: {
             contactUs: "Написать нам",
             name: "Ваше имя",
             email: "Email",
             message: "Сообщение",
             submit: "Отправить"
         },
+        ExercisePage: {
+            resetButton: "Сбросить",
+            showAnswersButton: "Показать ответы",
+            checkAnswersButton: "Проверить ответы"
+        }
 
     }
 }

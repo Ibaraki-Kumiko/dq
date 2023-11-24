@@ -33,13 +33,13 @@
                     </fieldset>
                     <fieldset class="mt-3 text-center">
                         <button type="button" class="btn btn-reset" @click="resetExercise" :disabled="isLoading"
-                        >Сбросить
+                        >{{ $t("ExercisePage.resetButton") }}
                         </button>
                         <button type="button" class="btn btn-show" @click="onShowAnswers"
-                                :disabled="isRightAnswersShowed || isLoading">Показать ответы
+                                :disabled="isRightAnswersShowed || isLoading">{{ $t("ExercisePage.showAnswersButton") }}
                         </button>
                         <button type="button" class="btn btn-answer" @click="checkAnswers"
-                                :disabled="isRightAnswersShowed || isLoading">Проверить ответы
+                                :disabled="isRightAnswersShowed || isLoading">{{ $t("ExercisePage.checkAnswersButton") }}
                         </button>
 
                     </fieldset>

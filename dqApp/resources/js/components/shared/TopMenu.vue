@@ -119,7 +119,7 @@ export default {
     methods: {
         onClick() {
             this.$store.dispatch(actionTypes.logout).then(() => {
-                this.$router.push({path: '/home'})
+                this.$router.push({path: '/'})
             })
         },
 

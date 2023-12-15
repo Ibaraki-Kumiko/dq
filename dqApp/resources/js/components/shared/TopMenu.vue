@@ -54,7 +54,7 @@
                             <hr class="menu-divider">
                         </li>
                         <li>
-                            <router-link class="nav-link"
+                            <router-link class="nav-link disabled"
                                          :to="{name: 'updateProfile', params: {nickname: currentUser.nickname}}"
                                          active-class="active">
                                 {{ $t("TopMenu.settings") }}
@@ -194,5 +194,10 @@ a.router-link-exact-active, a.router-link-exact-active > ion-icon, li.router-lin
 .navbar-brand {
 
     color: $green;
+}
+
+.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
 }
 </style>

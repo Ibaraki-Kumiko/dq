@@ -18,10 +18,7 @@ class ExerciseIndexController extends Controller
      */
     public function __invoke(Request $request)
     {
-      // $units = Unit::all();
        $modules = Module::all();
-      //  $exercises =  Exercise::where('id', 1)->firstOrFail();
-
 
         return ExerciseIndexResource::collection($modules);
     }

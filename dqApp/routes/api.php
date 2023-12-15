@@ -32,35 +32,37 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('user', [AuthController::class, 'user']);
     Route::post('logout', [AuthController::class, 'logout']);
 
-
-});
-//modules
-Route::get('/modules', [\App\Http\Controllers\ModuleController::class, 'index']);
-Route::get('/modules/{slug}', [\App\Http\Controllers\ModuleController::class, 'show']);
+    //modules
+    Route::get('/modules', [\App\Http\Controllers\ModuleController::class, 'index']);
+    Route::get('/modules/{slug}', [\App\Http\Controllers\ModuleController::class, 'show']);
 
 //UNIT
 //Route::get('/modules/{id}/{unit_id}', [\App\Http\Controllers\UnitController::class, 'show']);
-Route::get('/modules/{module_slug}/{unit_slug}', [\App\Http\Controllers\UnitController::class, 'show']);
+    Route::get('/modules/{module_slug}/{unit_slug}', [\App\Http\Controllers\UnitController::class, 'show']);
 
 //Dictionary
-Route::get('/dictionary/{slug}', [\App\Http\Controllers\DictionaryController::class, 'show']);
-Route::post('/dictionary/',  [\App\Http\Controllers\DictionaryController::class, 'store']);
+    Route::get('/dictionary/{slug}', [\App\Http\Controllers\DictionaryController::class, 'show']);
+    Route::post('/dictionary/',  [\App\Http\Controllers\DictionaryController::class, 'store']);
 
 
 //Exercise
-Route::get('/exercise/{id}', [\App\Http\Controllers\ExerciseController::class, 'show']);
+    Route::get('/exercise/{id}', [\App\Http\Controllers\ExerciseController::class, 'show']);
 //Route::get('/exercises/{unit_id}', [\App\Http\Controllers\ExerciseController::class, 'index']);
-Route::get('/exercises/{slug}', [\App\Http\Controllers\ExerciseController::class, 'index']);
-Route::get('/exercises', \App\Http\Controllers\ExerciseIndexController::class);
+    Route::get('/exercises/{slug}', [\App\Http\Controllers\ExerciseController::class, 'index']);
+    Route::get('/exercises', \App\Http\Controllers\ExerciseIndexController::class);
 
 
 //OPTIONS
-Route::get('/options/{id}', [\App\Http\Controllers\OptionController::class, 'show']);
+    Route::get('/options/{id}', [\App\Http\Controllers\OptionController::class, 'show']);
 
 
 //Answers
-Route::post('/check/{id}', [\App\Http\Controllers\AnswerController::class, 'check']);
-Route::get('/answers/{id}', [\App\Http\Controllers\AnswerController::class, 'show']);
+    Route::post('/check/{id}', [\App\Http\Controllers\AnswerController::class, 'check']);
+    Route::get('/answers/{id}', [\App\Http\Controllers\AnswerController::class, 'show']);
+
+
+});
+
 
 //ChatGPT test
 /*Route::get('/chat', [\App\Http\Controllers\ChatController::class, 'send']);*/

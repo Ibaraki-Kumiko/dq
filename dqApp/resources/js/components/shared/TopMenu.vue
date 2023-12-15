@@ -26,6 +26,10 @@
                     <router-link class="nav-link" :to="{name: 'dictionary'}" exact active-class="active">{{ $t("TopMenu.dictionary") }}
                     </router-link>
                 </li>
+                <li class="nav-item">
+                    <router-link class="nav-link" :to="{name: 'allExercises'}" exact active-class="active">{{ $t("TopMenu.exercises") }}
+                    </router-link>
+                </li>
             </ul>
 
             <ul class="nav margin-left">

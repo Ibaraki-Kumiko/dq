@@ -1,35 +1,28 @@
 <template>
-    <div class="wrapper">
-
-        <ol>
-            <li v-for="module in modules">
-<!--                '/modules/:module_slug/:unit_slug/exercises/:exercise_id',-->
-<!--                <router-link class="nav-link" :to="{name: 'unit', params: {slug: slug, unit_slug: unit.slug}}" :class = "{disabled: !unit.theory}">-->
-<!--                <router-link class="nav-link" :to="{name: 'common', params: {module_slug: module.slug, unit_slug: module.unit.slug, exercise_id}}" :class = "{}">-->
-                    {{ module.name}}
-                    {{ module.translation }}
-
-<!--               </router-link>-->
-
-
-                        <ul>
-                            <li v-for="unit in module.units">
-                                {{unit.name}}
-                                <ul>
+    <div class="row">
+        <div class="wrapper">
+            <ol>
+                <li v-for="module in modules">
+                    <h6>{{ module.name }}</h6>
+                    <div v-for="(unit, index) in module.units" :key="index">
+                        <div v-if="unit.exercises.length > 0">
+                            <div>{{ unit.name }}  </div>
+                                <ol class="col-6">
                                     <li v-for="exercise in unit.exercises">
-                                        <router-link class="nav-link" :to="{name: 'common', params: {module_slug: module.slug, unit_slug: unit.slug, exercise_id: exercise.id}}" :class = "{}">
-                                        {{exercise.name}}
+                                        <router-link class="link"
+                                                     :to="{name: 'common', params: {module_slug: module.slug, unit_slug: unit.slug, exercise_id: exercise.id}}"
+                                                    >
+                                            {{ exercise.name }}
                                         </router-link>
                                     </li>
-                                </ul>
-                            </li>
-                        </ul>
+                                </ol>
+                        </div>
+                    </div>
+                </li>
 
+            </ol>
+        </div>
 
-
-            </li>
-
-        </ol>
 
     </div>
 </template>
@@ -39,22 +32,15 @@
 
 export default {
     name: "AllExercisesPage",
-    components: {
-
-
-    },
+    components: {},
     data() {
         return {
             loading: false,
             modules: [],
-
-
-
         }
     },
     created() {
 
-      /*  this.slug = this.$route.params.slug;*/
         this.loading = true;
         this.$store.commit('setLoading', true);
         axios
@@ -63,7 +49,7 @@ export default {
                 this.modules = response.data.data;
                 console.log(this.modules)
             })
-            .then(() =>  {
+            .then(() => {
                     this.$store.commit('setLoading', false);
                     this.loading = false;
                 }
@@ -71,10 +57,12 @@ export default {
     },
 
 
-
 }
 </script>
 
 <style scoped>
-
+.link {
+    text-decoration: underline;
+    color: #0545a1;
+}
 </style>

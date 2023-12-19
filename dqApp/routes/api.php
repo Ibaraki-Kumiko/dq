@@ -3,7 +3,9 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\PasswordController;
+use App\Mail\TestEmail;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -23,6 +25,7 @@ Route::post('register', [AuthController::class, 'register']);
 Route::post('login', [AuthController::class, 'login']);
 Route::post('forgot', [PasswordController::class, 'forgot']);
 Route::post('reset', [PasswordController::class, 'reset']);
+
 
 
 Route::post('/feedback', [FeedbackController::class, 'submitForm'])->name('submit.form');

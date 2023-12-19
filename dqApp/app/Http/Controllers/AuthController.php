@@ -3,11 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\RegisterRequest;
+use App\Mail\FeedbackMail;
+use App\Mail\WelcomeEmail;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Mail\Message;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Symfony\Component\HttpFoundation\Response;
 
 class AuthController extends Controller

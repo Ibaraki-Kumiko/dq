@@ -18,6 +18,8 @@ import ExercisesPage from "../views/ExercisesPage";
 import TheoryPage from "../views/TheoryPage";
 import AboutUsPage from "../views/AboutUsPage";
 import AllExercisesPage from "../views/AllExercisesPage";
+import ResetPage from "../views/ResetPage";
+import ForgotPage from "../views/ForgotPage";
 
 
 
@@ -40,6 +42,17 @@ const routes = [
         component: LoginPage
     },
 
+    {
+        path: '/reset/:token',
+        name: 'reset',
+        component: ResetPage
+    },
+
+    {
+        path: '/forgot',
+        name: 'forgot',
+        component: ForgotPage
+    },
     {
         path: '/logout',
         name: 'logout',

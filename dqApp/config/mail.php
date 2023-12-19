@@ -44,6 +44,16 @@ return [
             'timeout' => null,
             'auth_mode' => null,
         ],
+        'second_smtp' => [
+            'transport' => 'smtp',
+            'host' => env('SECOND_MAIL_HOST', 'smtp.second-example.com'),
+            'port' => env('SECOND_MAIL_PORT', 587),
+            'encryption' => env('SECOND_MAIL_ENCRYPTION', 'tls'),
+            'username' => env('SECOND_MAIL_USERNAME'),
+            'password' => env('SECOND_MAIL_PASSWORD'),
+            'timeout' => null,
+            'auth_mode' => null,
+        ],
 
         'ses' => [
             'transport' => 'ses',

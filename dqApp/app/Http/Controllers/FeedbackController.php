@@ -32,9 +32,7 @@ class FeedbackController extends Controller
 
             $request->validate($rules, $messages);
 
-            Mail::to('admin@deutsche-quelle.de')->send(new FeedbackMail($request->all()));
-           /* Mail::to('u85537@deutsche-quelle.de')->send(new FeedbackMail($request->all()));*/
-
+          Mail::to('admin@deutsche-quelle.de')->send(new FeedbackMail($request->all()));
             return response()->json(['message' => 'Сообщение успешно отправлено'], 200);
         } catch (ValidationException $e) {
             return response()->json(['errors' => $e->errors()], 422);

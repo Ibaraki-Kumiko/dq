@@ -19,8 +19,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-
-
 Route::post('register', [AuthController::class, 'register']);
 Route::post('login', [AuthController::class, 'login']);
 Route::post('forgot', [PasswordController::class, 'forgot']);
@@ -66,6 +64,17 @@ Route::middleware('auth:sanctum')->group(function () {
 
 });
 
+//Admin panel
+
+Route::group([ 'prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['role:admin', 'auth:sanctum']], function() {
+
+    Route::get('/dashboard', function() {
+
+        return 'Willkommen, Administrator';
+    });
+
+
+});
 
 //ChatGPT test
 /*Route::get('/chat', [\App\Http\Controllers\ChatController::class, 'send']);*/

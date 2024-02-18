@@ -14,8 +14,16 @@ class RoleMiddleware
      * @param  \Closure(\Illuminate\Http\Request): (\Illuminate\Http\Response|\Illuminate\Http\RedirectResponse)  $next
      * @return \Illuminate\Http\Response|\Illuminate\Http\RedirectResponse
      */
-    public function handle(Request $request, Closure $next)
+    public function handle($request, Closure $next, $role, $permission = null)
     {
+        if(!auth()->user()->hasRole($role)) {
+            abort(404);
+        }
+        if($permission !== null && !auth()->user()->can($permission)) {
+            abort(404);
+        }
         return $next($request);
     }
+
+
 }

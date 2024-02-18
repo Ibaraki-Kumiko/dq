@@ -15,7 +15,7 @@ class ExerciseController extends Controller
      */
     public function index($slug)
     {
-       // $unit_id = $request->unit_id;
+
         $unit= Unit::where('slug', $slug)->firstOrFail();
 
         $exercises = Exercise::where('unit_id', $unit->id)->get();

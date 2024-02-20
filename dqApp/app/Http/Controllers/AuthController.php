@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\RegisterRequest;
+use App\Http\Resources\UserResource;
 use App\Mail\FeedbackMail;
 use App\Mail\WelcomeEmail;
 use App\Models\User;
@@ -38,16 +39,21 @@ class AuthController extends Controller
         $user = User::where('email', $request->input('email'))->first();
         $token = $user->createToken('token')->plainTextToken;
         $response = [
-            'user' => $user,
+            'user' => new UserResource($user),
             'token' => $token
         ];
+      /*  $response = [
+            'user' => $user,
+            'token' => $token
+        ];*/
 
-        return response($response, 201);
+        return response($response, 200);
     }
     public function user(Request $request)
     {
 
-        return $request->user();
+        //return $request->user();
+        return new UserResource($request->user());
     }
 
     public function logout()

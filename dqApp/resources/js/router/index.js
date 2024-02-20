@@ -21,7 +21,9 @@ import AllExercisesPage from "../views/AllExercisesPage";
 import ResetPage from "../views/ResetPage";
 import ForgotPage from "../views/ForgotPage";
 
-
+//Admin Panel
+import AdminIndex from "../views/admin/index"
+/*import AdminModulesIndex from "../views/admin/modules/index"*/
 
 
 const routes = [
@@ -120,6 +122,14 @@ const routes = [
         name: 'about',
         component: AboutUsPage
     },
+    //Admin panel
+    {
+        path: '/admin',
+        name: 'admin.index',
+        component: AdminIndex,
+    },
+
+    /*{ path: '/admin/modules', name: 'admin.modules', component: AdminModulesIndex, meta: {middleware: ['admin']}  },*/
 
     {
         path: "/:notFound",

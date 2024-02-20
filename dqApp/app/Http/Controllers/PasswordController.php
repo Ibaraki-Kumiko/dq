@@ -32,8 +32,6 @@ class PasswordController extends Controller
                 $message->to($email);
             });
 
-
-            //   return response()->json(['message' => 'Сообщение успешно отправлено'], 200);
             return response([
                 'message' => 'Check your email!'
             ]);

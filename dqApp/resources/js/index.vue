@@ -1,25 +1,37 @@
 <template>
-    <div class="container">
-        <div class="content">
-            <Toast />
+    <div >
+        <div class="container" v-if="!isAdmin">
+            <div class="content">
+                <Toast/>
+                <EllipsisLoader :color="'#54f1d2'" :loading="loading"></EllipsisLoader>
+
+                <template>
+                    <TopMenu></TopMenu>
+                </template>
+
+                <router-view v-show="!loading"></router-view>
+                <Footer></Footer>
+            </div>
+        </div>
+
+        <div class="content" v-if="isAdmin">
+            <Toast/>
             <EllipsisLoader :color="'#54f1d2'" :loading="loading"></EllipsisLoader>
-            <!-- <template v-if="isAdmin">
-                 <admin-menu></admin-menu>
-             </template>-->
-<!--            <template v-if="!isAdmin">
-                <TopMenu></TopMenu>
+<!--            <template>
+                <admin-menu></admin-menu>
             </template>-->
-            <template>
-                <TopMenu></TopMenu>
-            </template>
             <router-view v-show="!loading"></router-view>
         </div>
-        <Footer></Footer>
     </div>
+
+
+
+
 </template>
 
 <script>
 import TopMenu from "./components/shared/TopMenu";
+import AdminMenu from "./components/admin/TopNavBar";
 import Footer from "./components/shared/Footer";
 import EllipsisLoader from "./components/shared/EllipsisLoader";
 import {mapState, mapGetters} from 'vuex'
@@ -34,7 +46,8 @@ export default {
         TopMenu,
         Footer,
         Toast,
-        EllipsisLoader
+        EllipsisLoader,
+        AdminMenu
 
     },
     computed: {
@@ -42,9 +55,13 @@ export default {
             return this.$store.state.toast.toastMessage;
         },
 
-            loading() {
-                return this.$store.state.loading;
-            }
+        loading() {
+            return this.$store.state.loading;
+        },
+        ...mapGetters({
+            currentUser: authGetterTypes.currentUser,
+            isAdmin: 'isAdmin'
+        }),
     },
 
     watch: {
@@ -59,21 +76,21 @@ export default {
             }
         },
     },
-  /*  computed: {
-        ...mapState({
-            /!* isLoading: state => state.userProfile.isLoading,
-             error: state => state.userProfile.error*!/
-        }),
-        ...mapGetters({
-            /!*   currentUser: authGetterTypes.currentUser,
-               isAdmin: 'isAdmin'*!/
+    /*  computed: {
+          ...mapState({
+              /!* isLoading: state => state.userProfile.isLoading,
+               error: state => state.userProfile.error*!/
+          }),
+          ...mapGetters({
+              /!*   currentUser: authGetterTypes.currentUser,
+                 isAdmin: 'isAdmin'*!/
 
 
-        }),
-        userProfileSlug() {
-            return this.currentUser.nickname
-        },
-    },*/
+          }),
+          userProfileSlug() {
+              return this.currentUser.nickname
+          },
+      },*/
     created() {
 
 

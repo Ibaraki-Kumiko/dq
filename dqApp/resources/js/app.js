@@ -40,6 +40,7 @@ import messages from "./VueI18n/messages";
 
 
 
+
 window.Vue = require('vue').default;
 
 Vue.use(VueRouter);
@@ -52,6 +53,8 @@ Vue.use(InstantSearch);
 Vue.use(BootstrapVue)
 
 Vue.use(VueI18n)
+
+
 
 const i18n = new VueI18n({
 

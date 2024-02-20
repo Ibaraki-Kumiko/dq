@@ -7,6 +7,10 @@ import contacts from "./modules/contacts"
 import toast from "./modules/toast"
 
 
+
+
+
+
 Vue.use(Vuex, VueCookies, VueCookie)
 
 export default new Vuex.Store({
@@ -23,9 +27,14 @@ export default new Vuex.Store({
         }
 
     },
-    getters: {
-        currentLanguage: state => state.language
-    },
+    /*getters: {
+        currentLanguage: state => state.language,
+        sidebar: state => state.app.sidebar,
+        device: state => state.app.device,
+        token: state => state.user.token,
+        avatar: state => state.user.avatar,
+        name: state => state.user.name
+    },*/
     actions: {
         changeLanguage({ commit }, language) {
             commit('setLanguage', language);
@@ -34,7 +43,9 @@ export default new Vuex.Store({
     modules: {
         auth,
         contacts,
-        toast
+        toast,
+
+
 
     }
 })

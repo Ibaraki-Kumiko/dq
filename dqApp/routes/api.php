@@ -67,9 +67,8 @@ Route::middleware('auth:sanctum')->group(function () {
 //Admin panel
 
 Route::group([ 'prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['role:admin', 'auth:sanctum']], function() {
-
+    Route::get('/modules', '\App\Http\Controllers\Admin\ModuleController@index')->name('admin.module.index');
     Route::get('/dashboard', function() {
-
         return 'Willkommen, Administrator';
     });
 

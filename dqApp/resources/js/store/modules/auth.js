@@ -91,7 +91,7 @@ const mutations = {
     },
     [mutationTypes.getCurrentUserSuccess](state, payload) {
         state.isLoading = false
-        state.currentUser = payload
+        state.currentUser = payload.data
         state.isLoggedIn = true
     },
     [mutationTypes.getCurrentUserFailure](state) {
@@ -153,8 +153,7 @@ const actions = {
             authApi.getCurrentUser()
                 .then(response => {
                     context.commit(mutationTypes.getCurrentUserSuccess, response.data)
-
-                    resolve(response.data.user)
+                    resolve(response.data)
                 }).catch(() => {
                 context.commit(mutationTypes.getCurrentUserFailure)
                 resolve()
